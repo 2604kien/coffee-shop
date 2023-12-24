@@ -1,0 +1,8 @@
+.staff{
+    display: grid;
+    grid-template-columns: 21% 21% 21% 21%;
+    gap: 1.5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    place-content: center;
+}

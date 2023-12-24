@@ -1,6 +1,7 @@
 import "../css/HomePage.css"
 import banner from "../images/homepage_banner.png"
 import About from "./About"
+import Staff from "./Staff"
 export default function HomePage(){
     return(
         <div className="homepage">
@@ -24,6 +25,7 @@ export default function HomePage(){
             }}>Book Now</h2>
             <img src={banner} style={{width:"100%"}}/>
             <About/>
+            <Staff/>
         </div>
     )
 }
