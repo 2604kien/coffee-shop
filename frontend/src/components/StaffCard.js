@@ -6,13 +6,15 @@ export default function StaffCard(props){
             display: "flex",
             flexDirection:"column",
             justifyContent:"center",
-            alignItems:"center"
+            alignItems:"center",
+            marginTop:"5%"
         }}>
             <div style={{display:"flex", flexDirection:"column", width: "100%", height: "495px", backgroundImage: `url(${props.data.image})`, backgroundSize:"cover", backgroundRepeat:"no-repeat", placeContent:"flex-end"}}>
                 <div className="staff--card" style={{
                     backgroundColor:"rgba(0,0,0,0.5)",
                     color: "rgb(212, 193, 16)",
-                    visibility: isHover?"visible":"hidden"
+                    opacity: isHover?"1":"0",
+                    transition:"all 0.3s ease"
                 }}>
                     <h3 style={{fontFamily:"'Handlee', cursive"}}>{props.data.name}</h3>
                     <h3 style={{fontFamily:"'Handlee', cursive"}}>Position: {props.data.role}</h3>
