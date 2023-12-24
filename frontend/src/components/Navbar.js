@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
 
@@ -25,7 +24,6 @@ export default function Navbar(){
                 <li onClick={()=>navigate('/login')}>Login</li>
             </ul>
         </div>
-        <Outlet/>
         </>
     )
 }
