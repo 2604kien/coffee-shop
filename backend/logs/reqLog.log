@@ -15,3 +15,7 @@ POST	/users	undefined
 POST	/users	undefined
 POST	/users	undefined
 POST	/users	undefined
+GET	/users	undefined
+GET	/coffee	undefined
+POST	/coffee	undefined
+POST	/coffee	undefined
