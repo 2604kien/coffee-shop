@@ -18,11 +18,11 @@ const createNewUser=async(req,res,next)=>{
     const {username, password, roles, fullName}=req.body
     try{
         //check if all required value is fill
-        if(!username ||!password||!fullName){
+        if(!username ||!password||!fullName||!Array.isArray(roles)||!roles.length){
             return res.json({message: "All field is required"});
         }
         //check if there is existing user with the same username
-        const existUsername=User.findOne({username: username}).lean().exec()
+        const existUsername= await User.findOne({username: username}).lean().exec()
         if(existUsername){
             return res.status(409).json({message: `An account with username: ${username} is already created`});
         }
@@ -32,7 +32,7 @@ const createNewUser=async(req,res,next)=>{
             username: username,
             password: hashedPwd,
             fullName: fullName,
-            roles: roles
+            roles: roles,
         }
         //add user object to the database;
         const user=await User.create(userObject);
