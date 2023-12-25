@@ -6,7 +6,7 @@ export default function About(){
     return(
         <div style={{textAlign:"center"}}>
         <h1 style={{color: "rgb(212, 193, 16)"}}>About Us</h1>
-        <div className="about">
+        <div id="about" className="about">
 
                 <p>"Step into a sensory journey at <span style={{color: "rgb(212, 193, 16)"}}>HIASE</span> the newest coffee haven that seamlessly marries the modern ambiance of 2023 with the timeless allure of traditional coffee craftsmanship dating back to 1960s. Nestled in the heart of the city, this enchanting coffee shop invites patrons to savor the rich heritage of coffee culture through meticulously preserved recipes that have stood the test of time. As you enter, the aroma of freshly ground beans wafts through the air, transporting you to a bygone era where every cup was a celebration of artistry and flavor. From meticulously hand-pulled shots of espresso to the frothy perfection of cappuccinos, each beverage is a testament to the expertise handed down through generations. At <span style={{color: "rgb(212, 193, 16)"}}>HIASE</span>, we invite you to immerse yourself in the warm embrace of tradition, where every sip tells a story that has been brewing for over a century."</p>
                 <img style={{width:"100%"}} src={About1}/>
