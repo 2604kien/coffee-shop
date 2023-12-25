@@ -14,3 +14,6 @@ body{
     font-family: 'Handlee', cursive;
     font-size: 1.2rem;
 }
+html {
+    scroll-behavior: smooth;
+  }
