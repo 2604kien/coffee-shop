@@ -1,7 +1,9 @@
 import React from "react"
 import '../css/Login.css'
-import LoginIMG from "../images/Login.png"
+import LoginIMG from "../images/Login.png";
+import {useNavigate} from "react-router-dom";
 export default function Login(){
+    const navigate=useNavigate()
     const [loginData, setLoginData]=React.useState({
         username: "",
         password:""
@@ -20,6 +22,7 @@ export default function Login(){
                 <input type="password" id="password" name="password" placeholder="Please enter your password..." required/>
                 <button> Login </button>
             </form>
+            <h3 onClick={()=>{navigate('/register')}}>Or register new account here.</h3>
         </div>
     )
 }
