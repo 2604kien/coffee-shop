@@ -6,17 +6,22 @@ const path=require('path');
 const mongoose=require('mongoose');
 const cors=require('cors')
 const corsOptions=require('./config/corsOptions');
+const cookieParser=require('cookie-parser')
 const {logger, logEvent}=require('./middleware/logger');
 
 const PORT=3500;
 connectDB();
 app.use(cors(corsOptions))
+
 app.use(logger);
 app.use(express.json());
+
+app.use(cookieParser())
 
 
 app.use('/', express.static(path.join(__dirname, "public")));
 app.use('/', require('./routes/root'))
+app.use('/auth', require('./routes/authRoutes'));
 app.use('/users', require('./routes/userRoutes'));
 app.use('/coffee', require('./routes/coffeeRoutes'));
 

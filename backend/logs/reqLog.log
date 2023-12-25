@@ -71,3 +71,9 @@ POST	/users	http://localhost:3000
 POST	/users	http://localhost:3000
 POST	/users	http://localhost:3000
 GET	/users	undefined
+POST	/auth/login	undefined
+POST	/auth	undefined
+POST	/auth	undefined
+POST	/auth	undefined
+POST	/auth	undefined
+POST	/auth	undefined
