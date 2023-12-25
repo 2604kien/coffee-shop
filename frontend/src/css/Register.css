@@ -1,4 +1,4 @@
-.login{
+.register{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,33 +6,8 @@
     width: 100vw;
     height: 100vh;
 }
-.logo--login{
-    width: 30%;
-    height: 30%;
-    background-size: cover;
-    filter: blur(0.5px);
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.logo--login>h1{
-    color: rgb(212, 193, 16);
-    font-size: 3rem;
-    padding: 5px;
-    border: 2px solid rgb(212, 193, 16);
-    background-color: rgba(0,0,0,0.5);
-}
-.logo--login>h2{
-    color: rgb(212, 193, 16);
-    background-color: rgba(0,0,0,0.5);
-}
-.login>h1{
-    color: rgb(212, 193, 16);
-}
-.login--form{
-    display: flex;
+.register--form>fieldset{
+     display: flex;
     flex-direction: column;
     text-align: left;
     justify-content: center;
@@ -42,16 +17,17 @@
     padding: 25px;
     gap: 10px;
 }
-.login--form>input{
+.register--form>fieldset>input{
     width: 300px;
     text-indent: 5px;
     border: none;
     border-bottom: 2px solid rgb(212, 193, 16);
     outline: none;
     color: rgb(212, 193, 16);
+    background-color: rgba(0,0,0,0.2);
     font-size: 1.2rem;
 }
-.login--form>button{
+.register--form>fieldset>button{
     width: 50%;
     height: 40px;
     margin-top: 20px;
@@ -60,9 +36,4 @@
     font-size: 1.2rem;
     cursor: pointer;
     border: 2px solid rgb(212, 193, 16);
-}
-.login>h3{
-    color: rgb(212, 193, 16);
-    text-decoration: underline;
-    cursor: pointer;
 }
