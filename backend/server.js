@@ -4,10 +4,13 @@ const app=express();
 const connectDB=require('./config/dbConn');
 const path=require('path');
 const mongoose=require('mongoose');
+const cors=require('cors')
+const corsOptions=require('./config/corsOptions');
 const {logger, logEvent}=require('./middleware/logger');
 
 const PORT=3500;
 connectDB();
+app.use(cors(corsOptions))
 app.use(logger);
 app.use(express.json());
 
