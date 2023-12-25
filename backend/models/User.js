@@ -16,6 +16,10 @@ const userSchema=new mongoose.Schema({
     roles:[{
         type:String,
         default:"Employee"
-    }]
+    }],
+    createdDate:{
+        type: String,
+        default: Date.now()
+    }
 })
 module.exports=mongoose.model('User', userSchema);
