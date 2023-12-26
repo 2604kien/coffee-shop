@@ -1,6 +1,7 @@
 const express =require('express');
 const router=express.Router();
-
+const bookingController=require('../controllers/bookingController');
 router.route('/')
-.get()
-export default router;
+.get(bookingController.getAllBooking)
+.post(bookingController.addNewBooking)
+module.exports=router

@@ -7,7 +7,7 @@ const getAllCoffeeInfo=async (req,res,next)=>{
         if(!foundedCoffee?.length){
             return res.status(400).json({message: "No Coffee Item is found"});
         }
-        return res.json(foundedCoffee);
+        return res.status(200).json({message: "All coffee recipe data retrieved", data:foundedCoffee});
     }
     catch(err){
         next(err);
