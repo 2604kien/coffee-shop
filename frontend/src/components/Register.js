@@ -7,6 +7,8 @@ import { postNewUser } from "../reducers/userReducer";
 export default function Register(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const message=useSelector(state=>state.users.message)
+    const [currMessage, setCurrMessage]=React.useState(message);
     const [registerData, setRegisterData]=React.useState({
         fullName:"",
         username:"",
@@ -14,6 +16,9 @@ export default function Register(){
         confirmPassword:"",
         roles:['Member']
     });
+    React.useEffect(()=>{
+        setCurrMessage(message);
+    },[message])
     const [passwordNotMatch, setPasswordNotMatch]=React.useState(false)
     const handleChange=(event)=>{
         const {name, value}=event.target;
@@ -31,9 +36,7 @@ export default function Register(){
         }
         else{
             setPasswordNotMatch(false);
-            dispatch(postNewUser(registerData)).then(()=>{
-                navigate('/login');
-            });
+            dispatch(postNewUser(registerData))
         }
     }
     return (
@@ -46,6 +49,7 @@ export default function Register(){
                 <fieldset style={{border: "3px solid rgb(212, 193, 16)", backgroundColor:"rgba(0,0,0,0.8", maxWidth:"300px"}}>
                     <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>Register</legend>
                     {passwordNotMatch && <p style={{color: "red"}}>*Confirm password does not match, please try again.</p>}
+                    {currMessage.length>0 &&<p style={{color: "red"}}>{currMessage}</p>}
                     <label htmlFor="fullName">Full Name:</label>
                     <input type="text" id="fullName" name="fullName" onChange={handleChange} value={registerData.fullName} required/>
                     
