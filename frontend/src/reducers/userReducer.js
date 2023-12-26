@@ -16,6 +16,10 @@ const userSlice=createSlice({
         builder.addCase(postNewUser.fulfilled, (state, action)=>{
            state.message=action.payload.message;            
         })
+        .addCase(postNewUser.rejected, (state, action)=>{
+            console.log(action)
+            state.message=action.error.message;
+        })
     }
 })
 export default userSlice.reducer;

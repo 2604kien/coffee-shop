@@ -65,9 +65,10 @@ const refresh=(req, res)=>{
                     roles: foundedUser.roles
                 }
             }, process.env.ACCESS_SECRET_TOKEN, {expiresIn:"15m"})
+            
+            res.json({accessToken})
         }
     )
-    res.json({accessToken})
 }
 //create logout Route
 const logout=(req,res)=>{

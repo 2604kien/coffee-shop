@@ -8,6 +8,9 @@ export default function Login(){
         username: "",
         password:""
     })
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+    }
     return (
         <div className="login">
             <div className="logo--login blur" style={{backgroundImage: `url(${LoginIMG})`}}>
@@ -15,7 +18,7 @@ export default function Login(){
                 <h2>Since 1962</h2>
             </div>
             <h1>Member Login:</h1>
-            <form className="login--form">
+            <form onSubmit={handleSubmit} className="login--form">
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" name="username" placeholder="Please enter your username..." required/>
                 <label htmlFor="password">Password:</label>

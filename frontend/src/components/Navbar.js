@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
-
+import {useSelector} from "react-redux"
 export default function Navbar(){
     const navigate=useNavigate();
+    const isAuthenticated=useSelector(state=> state.auth.isAuthenticated);
     const [isScroll, setIsScroll]=React.useState(false);
     React.useEffect(()=>{
         const handleScroll=()=>{
@@ -18,10 +19,10 @@ export default function Navbar(){
             <ul style={{backgroundColor: isScroll>0? "white":"transparent", transition:"all 0.3s ease"}}>
                 <li onClick={()=>{navigate('/')}} style={{fontWeight:"bold", fontSize:"2rem"}}>HIASE</li>
                 <li onClick={()=>{navigate('/')}}>Home</li>
-                <li onClick={(e)=>{e.preventDefault(); navigate('/'); window.location.replace("#about")}}>About Us</li>
+                {isAuthenticated && <li onClick={()=>navigate('/recipe')}>Coffe Recipe</li>}
                 <li onClick={()=>navigate('/menu')}>Today's Menu</li>
                 <li onClick={()=>navigate('/booking')}>Booking</li>
-                <li onClick={()=>navigate('/login')}>Login</li>
+                {isAuthenticated?<li onClick={()=>navigate('/login')}>Profile</li>: <li onClick={()=>navigate('/login')}>Login</li>}
             </ul>
         </div>
         </>
