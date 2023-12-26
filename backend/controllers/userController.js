@@ -6,7 +6,7 @@ const getAllUser=async(req,res, next)=>{
         if(!foundedUsers?.length){
             return res.status(400).json({message: "No users found"});
         }
-        return res.json(foundedUsers);
+        return res.status(200).json({message: "All user data retrieved", data:foundedUsers});
     }
     catch(err){
         next(err);
