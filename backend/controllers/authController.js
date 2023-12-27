@@ -32,14 +32,12 @@ const login=async (req,res)=>{
     }, process.env.REFRESH_SECRET_TOKEN, {expiresIn:"7d"})
     foundedUser.refreshToken=refreshToken;
     const result=foundedUser.save();
-    console.log(result);
     res.cookie('jwt',refreshToken,{
         httpOnly: true,
         secure: true,
         sameSite: 'None',
         maxAge: 7*24*60*60*1000
     })
-
     res.json(accessToken)
 }
 //create refresh access token endpoint when access token expire

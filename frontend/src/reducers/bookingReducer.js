@@ -13,7 +13,7 @@ export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get("http://localhost:3500/booking", config);
+    const response=await axios.get("http://localhost:3500/booking",config);
     return response.data;
 })
 export const deleteABooking=createAsyncThunk('booking/deleteABooking', async({id, token})=>{
