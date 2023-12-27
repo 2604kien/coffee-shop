@@ -16,9 +16,11 @@ export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token
     const response=await axios.get("http://localhost:3500/booking", config);
     return response.data;
 })
-export const deleteABooking=createAsyncThunk('booking/deleteABooking', async(id)=>{
-    console.log(id);
-    const response = await axios.delete(`http://localhost:3500/booking/${id}`);
+export const deleteABooking=createAsyncThunk('booking/deleteABooking', async({id, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response = await axios.delete(`http://localhost:3500/booking/${id}`, config);
     return response.data;
 })
 const bookingSlice=createSlice({
