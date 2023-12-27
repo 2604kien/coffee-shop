@@ -7,6 +7,7 @@ import { getAllBooking } from "../reducers/bookingReducer";
 export default function BookingList(){
     const dispatch=useDispatch();
     const allBooking=useSelector(state=>state.booking.entities);
+    const [reload, setReload]=React.useState(null);
     const element=Array.isArray(allBooking)?allBooking.map(el=><BookingTableCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{
         dispatch(getAllBooking());

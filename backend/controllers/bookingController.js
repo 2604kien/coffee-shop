@@ -38,7 +38,25 @@ const getAllBooking=async(req,res, next)=>{
         next(err)
     }
 }
+const deleteOneBooking=async(req,res, next)=>{
+    try{
+        const {id}=req.params;
+        if(!id){
+            return res.status(400).json({message:"An id required to delete the booking"});
+        }
+        const booking= await Booking.findById(id).exec();
+        if(!booking) {
+            return res.status(400).json({message: "The booking is not found"});
+        }
+        const result= await booking.deleteOne();
+        res.json({message:`The booking is deleted.`});
+    }
+    catch(err){
+        next(err)
+    }
+}
 module.exports={
     getAllBooking,
-    addNewBooking
+    addNewBooking,
+    deleteOneBooking
 }
