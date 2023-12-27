@@ -7,6 +7,10 @@ export const addNewBooking=createAsyncThunk('booking/addNewBooking', async(booki
     const response=await axios.post("http://localhost:3500/booking", booking);
     return response.data;
 })
+export const getAllBooking=createAsyncThunk('booking/getAllBooking', async()=>{
+    const response=await axios.get("http://localhost:3500/booking");
+    return response.data;
+})
 
 const bookingSlice=createSlice({
     name:'booking',
@@ -15,6 +19,9 @@ const bookingSlice=createSlice({
     extraReducers: (builder)=>{
         builder.addCase(addNewBooking.fulfilled, (state, action)=>{
             state.satus='succeeded';
+        })
+        .addCase(getAllBooking.fulfilled, (state, action)=>{
+            state.entities=action.payload.data;
         })
     }
 })

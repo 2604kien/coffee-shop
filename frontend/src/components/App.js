@@ -8,6 +8,7 @@ import Register from "./Register";
 import CoffeeRecipe from "./CoffeeRecipe";
 import Booking from "./Booking";
 import Menu from "./Menu";
+import BookingList from "./BookingList";
 function App() {
   return (
       <Routes>
@@ -18,6 +19,7 @@ function App() {
           <Route path="recipe" element={<CoffeeRecipe/>}/>
           <Route path="booking" element={<Booking/>}/>
           <Route path="menu" element={<Menu/>}/>
+          <Route path="booking-list" element={<BookingList/>}/>
           <Route path="*" element={<Error404/>}/>
         </Route>
       </Routes>
