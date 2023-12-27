@@ -110,3 +110,6 @@ GET	/users	undefined
 GET	/booking	undefined
 GET	/booking	undefined
 GET	/booking	undefined
+POST	/users	http://localhost:3000
+POST	/booking	http://localhost:3000
+POST	/booking	http://localhost:3000
