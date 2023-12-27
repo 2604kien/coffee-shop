@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux";
+import { logout } from "../reducers/authReducer";
 export default function Navbar(){
     const navigate=useNavigate();
+    const dispatch=useDispatch();
     const isAuthenticated=useSelector(state=> state.auth.isAuthenticated);
     const [isScroll, setIsScroll]=React.useState(false);
     React.useEffect(()=>{
@@ -13,6 +15,12 @@ export default function Navbar(){
         window.addEventListener('scroll', handleScroll)
         return ()=>{ window.removeEventListener('scroll', handleScroll)}
     },[])
+    const handleLogout=()=>{
+        dispatch(logout()).then(()=>{
+            alert('You are succeessfully log out.')
+            navigate('/login');
+        })
+    }
     return(
         <>
         <div className="navigation-bar">
@@ -22,7 +30,7 @@ export default function Navbar(){
                 {isAuthenticated && <li onClick={()=>navigate('/recipe')}>Coffe Recipe</li>}
                 {isAuthenticated?<li onClick={()=>navigate('/booking-list')}>Booking List</li>: <li onClick={()=>navigate('/menu')}>Today's Menu</li>}
                 <li onClick={()=>navigate('/booking')}>Booking</li>
-                {isAuthenticated?<li onClick={()=>navigate('/login')}>Profile</li>: <li onClick={()=>navigate('/login')}>Login</li>}
+                {isAuthenticated?<li onClick={handleLogout}>Logout</li>: <li onClick={()=>navigate('/login')}>Login</li>}
             </ul>
         </div>
         </>
