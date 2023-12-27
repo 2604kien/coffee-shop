@@ -20,7 +20,7 @@ export default function Navbar(){
                 <li onClick={()=>{navigate('/')}} style={{fontWeight:"bold", fontSize:"2rem"}}>HIASE</li>
                 <li onClick={()=>{navigate('/')}}>Home</li>
                 {isAuthenticated && <li onClick={()=>navigate('/recipe')}>Coffe Recipe</li>}
-                <li onClick={()=>navigate('/menu')}>Today's Menu</li>
+                {isAuthenticated?<li onClick={()=>navigate('/booking-list')}>Booking List</li>: <li onClick={()=>navigate('/menu')}>Today's Menu</li>}
                 <li onClick={()=>navigate('/booking')}>Booking</li>
                 {isAuthenticated?<li onClick={()=>navigate('/login')}>Profile</li>: <li onClick={()=>navigate('/login')}>Login</li>}
             </ul>
