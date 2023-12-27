@@ -1,11 +1,15 @@
 import "../css/HomePage.css"
 import banner from "../images/homepage_banner.png"
 import About from "./About"
+import {useNavigate} from "react-router-dom"
 import Staff from "./Staff"
 export default function HomePage(){
+    const navigate=useNavigate();
     return(
         <div className="homepage">
-            <h2 className="book" style={{
+            <h2 
+            onClick={()=>navigate('/booking')}
+            className="book" style={{
                 color: "rgb(212, 193, 16)",
                 border: "1px solid rgb(212, 193, 16)",
                 borderRadius: "20px",
@@ -23,7 +27,13 @@ export default function HomePage(){
                 cursor:"pointer",
                 transition: "all 0.2s ease"
             }}>Book Now</h2>
-            <img src={banner} style={{width:"100%"}}/>
+            <div style={{
+                backgroundImage:`url(${banner})`,
+                backgroundSize: "cover",
+                backgroundPosition:"30%",
+                width: "100%",
+                height: "680px"
+            }}></div>
             <About/>
             <Staff/>
         </div>
