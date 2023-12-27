@@ -1,15 +1,21 @@
 import React from "react";
 import moment from "moment"
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { deleteABooking } from "../reducers/bookingReducer";
 export default function BookingTableCard(props){
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    const handleDelete=()=>{
-        dispatch(deleteABooking(props.data._id)).then(()=>{
+    const token=useSelector(state=> state.auth.token);
+    const handleDelete=(e)=>{
+        e.preventDefault();
+        const data={
+            id: props.data._id,
+            token: token
+        }
+        dispatch(deleteABooking(data)).then(()=>{
             alert('A booking is deleted');
-            window.location.reload();
+            navigate('/')
         });
     }
     return(

@@ -30,7 +30,9 @@ const login=async (req,res)=>{
             username: foundedUser.username
         }
     }, process.env.REFRESH_SECRET_TOKEN, {expiresIn:"7d"})
-
+    foundedUser.refreshToken=refreshToken;
+    const result=foundedUser.save();
+    console.log(result);
     res.cookie('jwt',refreshToken,{
         httpOnly: true,
         secure: true,
@@ -56,7 +58,7 @@ const refresh=(req, res)=>{
         async(err, decoded)=>{
             //return 403 forbidden if verification fail
             if(err) return res.status(403).json({message: "Forbidden"})
-            const foundedUser=await User.findOne({username: decoded.username}).exec();
+            const foundedUser=await User.findOne({refreshToken}).exec();
             if(!foundedUser) return res.status(401).json({message: "Unauthorized"})
             //generate new access Token
             const accessToken=jwt.sign({
