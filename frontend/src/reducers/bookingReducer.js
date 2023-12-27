@@ -11,7 +11,11 @@ export const getAllBooking=createAsyncThunk('booking/getAllBooking', async()=>{
     const response=await axios.get("http://localhost:3500/booking");
     return response.data;
 })
-
+export const deleteABooking=createAsyncThunk('booking/deleteABooking', async(id)=>{
+    console.log(id);
+    const response = await axios.delete(`http://localhost:3500/booking/${id}`);
+    return response.data;
+})
 const bookingSlice=createSlice({
     name:'booking',
     initialState: initialState,
@@ -22,6 +26,9 @@ const bookingSlice=createSlice({
         })
         .addCase(getAllBooking.fulfilled, (state, action)=>{
             state.entities=action.payload.data;
+        })
+        .addCase(deleteABooking.fulfilled, (state, action)=>{
+            state.status='succeeded';
         })
     }
 })
