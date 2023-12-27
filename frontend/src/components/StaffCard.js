@@ -9,7 +9,7 @@ export default function StaffCard(props){
             alignItems:"center",
             marginTop:"5%"
         }}>
-            <div style={{display:"flex", flexDirection:"column", width: "100%", height: "495px", backgroundImage: `url(${props.data.image})`, backgroundSize:"cover", backgroundRepeat:"no-repeat", placeContent:"flex-end"}}>
+            <div style={{display:"flex", flexDirection:"column", width: "100%", height: "495px", backgroundImage: `url(${props.data.image})`, backgroundPosition:"center", backgroundSize:"cover", backgroundRepeat:"no-repeat", placeContent:"flex-end"}}>
                 <div className="staff--card" style={{
                     backgroundColor:"rgba(0,0,0,0.5)",
                     color: "rgb(212, 193, 16)",
@@ -18,7 +18,6 @@ export default function StaffCard(props){
                 }}>
                     <h3 style={{fontFamily:"'Handlee', cursive"}}>{props.data.name}</h3>
                     <h3 style={{fontFamily:"'Handlee', cursive"}}>Position: {props.data.role}</h3>
-                    <p style={{fontFamily:"'Handlee', cursive"}}>Description: {props.data.description}</p>
                 </div>
             </div>
             
