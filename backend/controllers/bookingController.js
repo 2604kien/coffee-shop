@@ -7,11 +7,7 @@ const addNewBooking=async(req,res, next)=>{
         if(!dateTime||!name||!numPeople||!mobilePhone){
             return res.status(400).json({message: "All data need to be entered"});
         }
-        //check if date is taken
-        const foundReserved=Booking.findOne({dateTime}).lean().exec();
-        if(foundReserved){
-            return res.status(409).json({message: "The date and time you select is taken"})
-        }
+
         const bookingObject={
             dateTime: dateTime,
             name: name,
