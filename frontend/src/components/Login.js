@@ -2,15 +2,16 @@ import React from "react"
 import '../css/Login.css'
 import LoginIMG from "../images/Login.png";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { login } from "../reducers/authReducer";
 export default function Login(){
     const dispatch=useDispatch();
     const navigate=useNavigate()
+    const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const [loginData, setLoginData]=React.useState({
         username: "",
         password:""
-    })
+    });
     const handleChange=(e)=>{
         e.preventDefault();
         const {name, value}=e.target

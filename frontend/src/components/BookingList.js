@@ -3,17 +3,19 @@ import "../css/BookingList.css";
 import BookingPNG from "../images/Booking.png";
 import {useSelector, useDispatch} from "react-redux";
 import BookingTableCard from "./BookingTableCard";
-import { refresh } from "../reducers/authReducer";
+import Error404 from "./Error404";
 import { getAllBooking } from "../reducers/bookingReducer";
 export default function BookingList(){
     const dispatch=useDispatch();
     const allBooking=useSelector(state=>state.booking.entities);
     const token=useSelector(state=> state.auth.token);
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
+    const isAuthorized=useSelector(state=>state.auth.isAuthorized);
     const element=Array.isArray(allBooking)?allBooking.map(el=><BookingTableCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{        
         if(isAuthenticated) dispatch(getAllBooking(token));
     },[dispatch, token]);
+    if(!isAuthorized) return <Error404/>
     return(
         <div>
             <div className="booking--list" style={{backgroundImage:`url(${BookingPNG})`}} ></div>
