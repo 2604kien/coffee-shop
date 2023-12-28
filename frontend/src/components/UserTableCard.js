@@ -7,7 +7,11 @@ export default function UserTableCard(props){
             <th>{props.data.username}</th>
             <th>{props.data.roles.join(', ')}</th>
             <th>{moment(Number(props.data.createdDate)).format('h:mm A | DD/MM/YYYY')}</th>
-            <th></th>
+            <th>
+                <button className="small-button">View</button>
+                <button className="small-button">Edit</button>
+                <button className="small-button">Delete</button>
+            </th>
         </tr>
     )
 }
