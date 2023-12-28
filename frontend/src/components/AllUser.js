@@ -1,11 +1,17 @@
 import React from "react";
 import Error404 from "./Error404";
-
+import UserTableCard from "./UserTableCard";
 import {useSelector, useDispatch} from "react-redux";
+import { getAllUser } from "../reducers/userReducer";
 import BookingPNG from "../images/Booking.png";
 export default function AllUser(){
-    
+    const dispatch=useDispatch();
+    const usersData=useSelector(state=>state.users.entities);
     const isAuthorized=useSelector(state=>state.auth.isAuthorized);
+    const element=Array.isArray(usersData)?usersData.map(el=><UserTableCard key={el._id} data={el}/>):(<></>);
+    React.useEffect(()=>{
+        dispatch(getAllUser())
+    },[dispatch])
     if(!isAuthorized) return <Error404/>
     return(
         <div>
@@ -17,13 +23,13 @@ export default function AllUser(){
                         <tr>
                             <th>Full Name</th>
                             <th>Username</th>
-                            <th>Password</th>
                             <th>User Roles</th>
                             <th>Created Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {element}
                     </tbody>
                 </table>
             </fieldset>

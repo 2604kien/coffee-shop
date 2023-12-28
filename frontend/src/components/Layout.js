@@ -11,7 +11,6 @@ export default function Layout(){
     React.useEffect(()=>{
         dispatch(refresh())
         const tokenExpirationThreshold = 3; 
-        console.log(token)
         let { exp } = token.length>0?JSON.parse(window.atob(token.split('.')[1])):"";
         setInterval(()=>{
                 if (exp - Date.now() / 1000 < tokenExpirationThreshold) {
@@ -19,7 +18,6 @@ export default function Layout(){
                   
                  dispatch(refresh());
                  exp = {};
-                 console.log(exp);
                 }
             
         }, 13*60*1000)
