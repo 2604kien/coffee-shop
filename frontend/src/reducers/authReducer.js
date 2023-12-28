@@ -6,7 +6,7 @@ const authAdapter=createEntityAdapter();
 const initialState=authAdapter.getInitialState({
     token:"",
     isAuthenticated: false,
-    isAuthorized: false,
+    isAdminAuthorized: false,
     userRoles:["None"]
 });
 
@@ -33,16 +33,16 @@ const authSlice=createSlice({
         builder.addCase(login.fulfilled,(state, action)=>{
             state.status='succeeded';
             state.token=action.payload;
-            if(state.userRoles.includes("Admin")) state.isAuthorized=true;
-            else state.isAuthorized=false;
+            if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
+            else state.isAdminAuthorized=false;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
             state.isAuthenticated=true;
         })
         .addCase(refresh.fulfilled,(state, action)=>{
             state.token=action.payload.accessToken;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
-            if(state.userRoles.includes("Admin")) state.isAuthorized=true;
-            else state.isAuthorized=false;
+            if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
+            else state.isAdminAuthorized=false;
             state.isAuthenticated=true;
         })
         .addCase(refresh.rejected, (state, action)=>{
@@ -52,7 +52,7 @@ const authSlice=createSlice({
         .addCase(logout.fulfilled, (state, action)=>{
             state.token="";
             state.isAuthenticated=false;
-            state.isAuthorized=false;
+            state.isAdminAuthorized=false;
         })
     }
 })

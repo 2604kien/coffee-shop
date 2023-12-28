@@ -12,6 +12,7 @@ import Menu from "./Menu";
 import BookingList from "./BookingList";
 import DisplayRecipe from "./DisplayRecipe";
 import AllUser from "./AllUser";
+import EditUser from "./EditUser";
 function App() {
   return (
       <Routes>
@@ -24,6 +25,7 @@ function App() {
           <Route path="add-recipe" element={<AddCoffeeRecipe/>}/>
           <Route path="booking" element={<Booking/>}/>
           <Route path="all-users" element={<AllUser/>}/>
+          <Route path="all-users/edit/:id" element={<EditUser/>}/>
           <Route path="menu" element={<Menu/>}/>
           <Route path="booking-list" element={<BookingList/>}/>
           <Route path="*" element={<Error404/>}/>

@@ -7,12 +7,12 @@ import BookingPNG from "../images/Booking.png";
 export default function AllUser(){
     const dispatch=useDispatch();
     const usersData=useSelector(state=>state.users.entities);
-    const isAuthorized=useSelector(state=>state.auth.isAuthorized);
+    const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const element=Array.isArray(usersData)?usersData.map(el=><UserTableCard key={el._id} data={el}/>):(<></>);
     React.useEffect(()=>{
         dispatch(getAllUser())
     },[dispatch])
-    if(!isAuthorized) return <Error404/>
+    if(!isAdminAuthorized) return <Error404/>
     return(
         <div>
             <div className="booking--list" style={{backgroundImage:`url(${BookingPNG})`}} ></div>

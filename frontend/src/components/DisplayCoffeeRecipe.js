@@ -10,7 +10,7 @@ export default function DisplayCoffeeReceip(){
     const dispatch=useDispatch();
     const arrayRecipe=useSelector(state=>state.coffee.entities);
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
-    const isAuthorized=useSelector(state=>state.auth.isAuthorized);
+    const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const element=Array.isArray(arrayRecipe)? arrayRecipe.map(el=><DisplayCoffeeCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{
         dispatch(getAllCoffeeRecipe())
@@ -21,7 +21,7 @@ export default function DisplayCoffeeReceip(){
        
         <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
         <div className="coffee--form">  
-        {isAuthorized &&<button className="small-button" style={{
+        {isAdminAuthorized &&<button className="small-button" style={{
             position:"absolute",
             right: -578,
             zIndex:"1000",

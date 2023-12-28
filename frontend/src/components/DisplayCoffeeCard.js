@@ -3,11 +3,11 @@ import { useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 export default function DisplayCoffeeCard(props){
     const navigate=useNavigate();
-    const isAuthorized=useSelector(state=> state.auth.isAuthorized);
+    const isAdminAuthorized=useSelector(state=> state.auth.isAdminAuthorized);
     const handleClick=()=>{
         navigate(`/recipe/${props.data._id}`)
     }
-    const element= isAuthorized?(<div style={{
+    const element= isAdminAuthorized?(<div style={{
         display: "flex",
         flexDirection: "row"
     }}>
