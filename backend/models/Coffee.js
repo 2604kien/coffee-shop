@@ -8,7 +8,7 @@ const coffeeSchema= new mongoose.Schema({
         type:String,
         required: true
     },
-    imageURL:{
+    imageName:{
         type: String,
         required: true
     },

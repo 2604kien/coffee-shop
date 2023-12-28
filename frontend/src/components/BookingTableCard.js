@@ -15,7 +15,7 @@ export default function BookingTableCard(props){
         }
         dispatch(deleteABooking(data)).then(()=>{
             alert('A booking is deleted');
-            navigate('/')
+            window.location.reload();
         });
     }
     return(
