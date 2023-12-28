@@ -7,7 +7,7 @@ const initialState=authAdapter.getInitialState({
     token:"",
     isAuthenticated: false,
     isAuthorized: false,
-    userRoles:[]
+    userRoles:["None"]
 });
 
 export const login=createAsyncThunk('auth/login', async({username, password})=>{
@@ -26,13 +26,15 @@ export const logout=createAsyncThunk('auth/logout', async()=>{
 const authSlice=createSlice({
     name: 'auth',
     initialState,
-    reducers:{},
+    reducers:{
+        resetState:(state)=>initialState
+    },
     extraReducers:(builder)=>{
         builder.addCase(login.fulfilled,(state, action)=>{
             state.status='succeeded';
             state.token=action.payload;
             if(state.userRoles.includes("Admin")) state.isAuthorized=true;
-            else state.userRoles=false;
+            else state.isAuthorized=false;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
             state.isAuthenticated=true;
         })
@@ -40,7 +42,7 @@ const authSlice=createSlice({
             state.token=action.payload.accessToken;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
             if(state.userRoles.includes("Admin")) state.isAuthorized=true;
-            else state.userRoles=false;
+            else state.isAuthorized=false;
             state.isAuthenticated=true;
         })
         .addCase(refresh.rejected, (state, action)=>{
@@ -50,8 +52,9 @@ const authSlice=createSlice({
         .addCase(logout.fulfilled, (state, action)=>{
             state.token="";
             state.isAuthenticated=false;
+            state.isAuthorized=false;
         })
     }
 })
-
+export const {resetState}=authSlice.actions;
 export default authSlice.reducer;

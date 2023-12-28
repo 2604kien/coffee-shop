@@ -11,6 +11,7 @@ import Booking from "./Booking";
 import Menu from "./Menu";
 import BookingList from "./BookingList";
 import DisplayRecipe from "./DisplayRecipe";
+import AllUser from "./AllUser";
 function App() {
   return (
       <Routes>
@@ -22,6 +23,7 @@ function App() {
           <Route path="recipe/:id" element={<DisplayRecipe/>}/>
           <Route path="add-recipe" element={<AddCoffeeRecipe/>}/>
           <Route path="booking" element={<Booking/>}/>
+          <Route path="all-users" element={<AllUser/>}/>
           <Route path="menu" element={<Menu/>}/>
           <Route path="booking-list" element={<BookingList/>}/>
           <Route path="*" element={<Error404/>}/>

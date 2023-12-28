@@ -4,15 +4,18 @@ import BookingPNG from "../images/Booking.png";
 import DisplayCoffeeCard from "./DisplayCoffeeCard";
 import { getAllCoffeeRecipe } from "../reducers/coffeeReducer";
 import { useNavigate } from "react-router-dom";
+import Error404 from "./Error404";
 export default function DisplayCoffeeReceip(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const arrayRecipe=useSelector(state=>state.coffee.entities);
+    const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const isAuthorized=useSelector(state=>state.auth.isAuthorized);
     const element=Array.isArray(arrayRecipe)? arrayRecipe.map(el=><DisplayCoffeeCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{
         dispatch(getAllCoffeeRecipe())
     },[dispatch])
+    if(!isAuthenticated) return <Error404/>
     return(
         <div>
        

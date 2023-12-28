@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
 import {useSelector, useDispatch} from "react-redux";
-import { logout } from "../reducers/authReducer";
+import { logout, resetState } from "../reducers/authReducer";
 export default function Navbar(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
@@ -17,6 +17,8 @@ export default function Navbar(){
         return ()=>{ window.removeEventListener('scroll', handleScroll)}
     },[])
     const handleLogout=()=>{
+        
+        dispatch(resetState());
         dispatch(logout()).then(()=>{
             alert('You are succeessfully log out.')
             navigate('/login');

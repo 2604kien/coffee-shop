@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { refresh } from "../reducers/authReducer";
+import { refresh} from "../reducers/authReducer";
 export default function Layout(){
     const dispatch=useDispatch();
     const token=useSelector(state=> state.auth.token);
