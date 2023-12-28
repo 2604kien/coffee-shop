@@ -7,18 +7,21 @@ import BookingPNG from "../images/Booking.png";
 export default function CoffeeRecipe(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const [imageFile, setImageFile]=React.useState(null);
     const [formData, setFormData]=React.useState({
        itemName:"",
        recipe: "",
-       imageName:"Will be set later",
+       imageName: ""
     });
-    const [file, setFile]=React.useState();
     const handleSubmit=(e)=>{
         e.preventDefault();
         const newFormData= new FormData();
-        newFormData.append('file', file);
-        dispatch(uploadImage(newFormData));
-        dispatch(addNewCoffeeRecipe(formData)).then(()=>{
+        newFormData.append('imageFile', imageFile);
+        newFormData.append('itemName', formData.itemName);
+        newFormData.append('recipe', formData.recipe);
+        newFormData.append('imageName', formData.imageName);
+        console.log(formData);
+        dispatch(addNewCoffeeRecipe(newFormData)).then(()=>{
             alert('A coffee recipe is created.');
             window.location.reload();
         })
@@ -40,8 +43,16 @@ export default function CoffeeRecipe(){
                     <legend className="booking--text">Add New Coffee Recipe</legend>
                     <label htmlFor="itemName">Coffee Item Name:</label>
                     <input type="text" name="itemName" id="itemName"value={formData.itemName} onChange={handleChange} required/>
-                        <label htmlFor="file">Upload IMG</label>
-                        <input style={{border: "none"}} type="file" onChange={(e)=>setFile(e.target.files[0])}  name="file" id="file"/>
+                        <label htmlFor="imageFile">Upload IMG</label>
+                        <input style={{border: "none"}} type="file" onChange={(e)=>{
+                                setImageFile(e.target.files[0])
+                                setFormData(prev=>{
+                                    return {
+                                        ...prev,
+                                        imageName: e.target.files[0].name
+                                    }
+                                })
+                            }}  name="imageFile" id="imageFile"/>
                     <label htmlFor="recipe">Coffee Recipe:</label>
                     <textarea name="recipe" id="recipe" value={formData.recipe} onChange={handleChange} required/>
                     <button>Submit</button>

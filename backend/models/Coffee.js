@@ -9,8 +9,7 @@ const coffeeSchema= new mongoose.Schema({
         required: true
     },
     imageName:{
-        type: String,
-        required: true
+        type: String
     },
     date:{
         type: Date,
