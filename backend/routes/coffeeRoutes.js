@@ -4,13 +4,13 @@ const multer=require('multer');
 const path=require('path')
 const coffeeController=require('../controllers/coffeeController')
 const verifyJWT=require('../middleware/verifyJWT');
-
+const Coffee=require('../models/Coffee');
 const storage=multer.diskStorage({
     destination: (req, file, cb)=>{
         cb( null, 'public/images')
     },
     filename: (req,file, cb)=>{
-        cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+        cb(null, file.originalname)
     }
 })
 const upload=multer({
@@ -18,6 +18,6 @@ const upload=multer({
 })
 router.route('/')
     .get(coffeeController.getAllCoffeeInfo)
-    .post(coffeeController.createNewCoffee)
-router.route('/upload').post(upload.single('file'), coffeeController.createNewCoffee)
+    .post(upload.single('imageFile'), coffeeController.createNewCoffee)
+
 module.exports=router

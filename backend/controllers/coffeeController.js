@@ -15,9 +15,11 @@ const getAllCoffeeInfo=async (req,res,next)=>{
 
 }
 
+
 const createNewCoffee=async(req,res, next)=>{
     const {itemName, recipe, imageName}=req.body;
-    if(!itemName||!recipe||!imageName){
+    console.log(itemName, recipe, imageName);
+    if(!itemName||!recipe){
         return res.json({message: "All field is required"});
     }
     const existItem= await Coffee.findOne({itemName:itemName}).lean().exec();
