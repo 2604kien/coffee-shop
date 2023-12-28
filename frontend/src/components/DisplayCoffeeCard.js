@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import { fetchCurrCoffeeData } from "../reducers/coffeeReducer";
 export default function DisplayCoffeeCard(props){
     const navigate=useNavigate();
     const isAuthorized=useSelector(state=> state.auth.isAuthorized);
