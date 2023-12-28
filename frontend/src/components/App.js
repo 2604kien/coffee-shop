@@ -10,6 +10,7 @@ import DisplayCoffeeReceip from "./DisplayCoffeeRecipe";
 import Booking from "./Booking";
 import Menu from "./Menu";
 import BookingList from "./BookingList";
+import DisplayRecipe from "./DisplayRecipe";
 function App() {
   return (
       <Routes>
@@ -18,6 +19,7 @@ function App() {
           <Route path="login" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="recipe" element={<DisplayCoffeeReceip/>}/>
+          <Route path="recipe/:id" element={<DisplayRecipe/>}/>
           <Route path="add-recipe" element={<AddCoffeeRecipe/>}/>
           <Route path="booking" element={<Booking/>}/>
           <Route path="menu" element={<Menu/>}/>

@@ -14,7 +14,19 @@ const getAllCoffeeInfo=async (req,res,next)=>{
     }
 
 }
-
+const getOneCoffeeInfo=async(req, res, next)=>{
+    const {id}=req.params;
+    try{
+        const foundedCoffee= await Coffee.findById(id).select("-_id -__v").exec();
+        if(!foundedCoffee){
+            return res.status(400).json({message: "No Coffee recipe found"});
+        }
+        return res.json({message: "Retrieve coffee recipe successfully", data: foundedCoffee});
+    }
+    catch(err){
+        next(err)
+    }
+}
 
 const createNewCoffee=async(req,res, next)=>{
     const {itemName, recipe, imageName}=req.body;
@@ -42,4 +54,5 @@ const createNewCoffee=async(req,res, next)=>{
 module.exports={
     getAllCoffeeInfo,
     createNewCoffee,
+    getOneCoffeeInfo
 };
