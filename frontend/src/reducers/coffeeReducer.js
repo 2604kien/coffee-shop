@@ -16,6 +16,11 @@ export const getAllCoffeeRecipe=createAsyncThunk('coffee/getAllCoffeeRecipe', as
 const coffeeSlice=createSlice({
     name:'coffee',
     initialState: initialState,
-    reducers:{}
+    reducers:{},
+    extraReducers: (builder)=>{
+        builder.addCase(getAllCoffeeRecipe.fulfilled, (state, action)=>{
+            state.entities=action.payload.data;
+        })
+    }
 })
 export default coffeeSlice.reducer;

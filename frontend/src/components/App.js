@@ -5,7 +5,8 @@ import HomePage from "./HomePage";
 import Error404 from "./Error404"
 import Login from "./Login";
 import Register from "./Register";
-import CoffeeRecipe from "./CoffeeRecipe";
+import AddCoffeeRecipe from "./AddCoffeeRecipe";
+import DisplayCoffeeReceip from "./DisplayCoffeeRecipe";
 import Booking from "./Booking";
 import Menu from "./Menu";
 import BookingList from "./BookingList";
@@ -16,7 +17,8 @@ function App() {
           <Route path="" element={<HomePage/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
-          <Route path="recipe" element={<CoffeeRecipe/>}/>
+          <Route path="recipe" element={<DisplayCoffeeReceip/>}/>
+          <Route path="add-recipe" element={<AddCoffeeRecipe/>}/>
           <Route path="booking" element={<Booking/>}/>
           <Route path="menu" element={<Menu/>}/>
           <Route path="booking-list" element={<BookingList/>}/>
