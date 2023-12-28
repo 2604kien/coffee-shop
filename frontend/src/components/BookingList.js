@@ -10,12 +10,12 @@ export default function BookingList(){
     const allBooking=useSelector(state=>state.booking.entities);
     const token=useSelector(state=> state.auth.token);
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
-    const isAuthorized=useSelector(state=>state.auth.isAuthorized);
+    const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const element=Array.isArray(allBooking)?allBooking.map(el=><BookingTableCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{        
         if(isAuthenticated) dispatch(getAllBooking(token));
     },[dispatch, token]);
-    if(!isAuthorized) return <Error404/>
+    if(!isAdminAuthorized) return <Error404/>
     return(
         <div>
             <div className="booking--list" style={{backgroundImage:`url(${BookingPNG})`}} ></div>

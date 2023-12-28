@@ -2,7 +2,7 @@ const User=require('../models/User');
 const bcrypt=require('bcrypt');
 const getAllUser=async(req,res, next)=>{
     try{
-        const foundedUsers=await User.find().select('-password').lean()
+        const foundedUsers=await User.find().lean()
         if(!foundedUsers?.length){
             return res.status(400).json({message: "No users found"});
         }
@@ -49,8 +49,47 @@ const createNewUser=async(req,res,next)=>{
         next(err)
     }
 }
+const updateUser=async(req,res,next)=>{
+    const {username, password, roles, fullName}=req.body;
+    try{
+        const foundedUsers=await User.findOne({username: username}).exec();
+        if(!foundedUsers) return res.json({message: "No user found."})
+        foundedUsers.username=username;
+        foundedUsers.password=await bcrypt.hash(password, 10);
+        foundedUsers.roles=roles;
+        foundedUsers.fullName=fullName;
+        const result=await foundedUsers.save();
+        res.json(result);
+    }
+    catch(err){
+        next(err);
+    }
 
+}
+const getUserById=async(req,res,next)=>{
+    const {id}=req.params;
+    if(!id) return res.status(400).json({message: "User Id required"});
+    const foundedUsers=await User.findById(id).lean().exec();
+    if(!foundedUsers) res.json({message:"No user found"});
+    res.json({message: "Retrieved data successfully", data: foundedUsers});
+}
+const deleteUser=async(req,res,next)=>{
+    const {id}=req.body;
+    try{
+        if(!id) return res.status(400).json({message: "User Id required"});
+        const foundedUsers=await User.findById(id).lean().exec;
+        if(!foundedUsers) res.json({message:"No user found"});
+        const result=User.deleteOne({_id:id});
+        res.json(result);
+    }
+    catch(err){
+
+    }
+}
 module.exports={
     getAllUser,
     createNewUser,
+    updateUser,
+    deleteUser,
+    getUserById
 }
