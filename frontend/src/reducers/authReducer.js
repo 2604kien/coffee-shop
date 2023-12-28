@@ -5,7 +5,8 @@ import axios from "axios"
 const authAdapter=createEntityAdapter();
 const initialState=authAdapter.getInitialState({
     token:"",
-    isAuthenticated: false
+    isAuthenticated: false,
+    isAuthorized: false,
 });
 
 export const login=createAsyncThunk('auth/login', async({username, password})=>{

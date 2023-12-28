@@ -1,11 +1,9 @@
 import React from "react";
 import moment from "moment"
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 import { deleteABooking } from "../reducers/bookingReducer";
 export default function BookingTableCard(props){
     const dispatch=useDispatch();
-    const navigate=useNavigate();
     const token=useSelector(state=> state.auth.token);
     const handleDelete=(e)=>{
         e.preventDefault();
