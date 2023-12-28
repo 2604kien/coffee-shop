@@ -13,6 +13,7 @@ body{
     align-items: center;
     font-family: 'Handlee', cursive;
     font-size: 1.2rem;
+    background-color: white;
 }
 html {
     scroll-behavior: smooth;

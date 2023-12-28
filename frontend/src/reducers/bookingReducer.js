@@ -11,7 +11,8 @@ export const addNewBooking=createAsyncThunk('booking/addNewBooking', async(booki
 })
 export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token)=>{
     const config={
-        headers: {Authorization: `Bearer ${token}`}
+        headers: {Authorization: `Bearer ${token}`},
+        role: JSON.parse(window.atob(token.split('.')[1])).UserInfo.roles
     }
     const response=await axios.get("http://localhost:3500/booking",config);
     return response.data;

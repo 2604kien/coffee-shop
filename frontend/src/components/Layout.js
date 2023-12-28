@@ -7,10 +7,11 @@ import { refresh } from "../reducers/authReducer";
 export default function Layout(){
     const dispatch=useDispatch();
     const token=useSelector(state=> state.auth.token);
+    
     React.useEffect(()=>{
         dispatch(refresh())
         const tokenExpirationThreshold = 3; 
-    
+        console.log(token)
         let { exp } = token.length>0?JSON.parse(window.atob(token.split('.')[1])):"";
         setInterval(()=>{
                 if (exp - Date.now() / 1000 < tokenExpirationThreshold) {

@@ -19,5 +19,7 @@ const upload=multer({
 router.route('/')
     .get(coffeeController.getAllCoffeeInfo)
     .post(upload.single('imageFile'), coffeeController.createNewCoffee)
+router.route('/:id')
+    .get(coffeeController.getOneCoffeeInfo);
 
 module.exports=router
