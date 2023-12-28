@@ -16,8 +16,8 @@ const getAllCoffeeInfo=async (req,res,next)=>{
 }
 
 const createNewCoffee=async(req,res, next)=>{
-    const {itemName, recipe, imageURL}=req.body;
-    if(!itemName||!recipe||!imageURL){
+    const {itemName, recipe, imageName}=req.body;
+    if(!itemName||!recipe||!imageName){
         return res.json({message: "All field is required"});
     }
     const existItem= await Coffee.findOne({itemName:itemName}).lean().exec();
@@ -27,7 +27,7 @@ const createNewCoffee=async(req,res, next)=>{
     const coffeeObject={
         itemName:itemName,
         recipe: recipe,
-        imageURL: imageURL
+        imageName: imageName
     }
     const coffee=await Coffee.create(coffeeObject);
     if(coffee){
