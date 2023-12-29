@@ -11,7 +11,7 @@
 .coffee--form{
     position: absolute;
     top: 15%;
-    left: 30%;
+    left: 32%;
 }
 .coffee--form>fieldset{
     display: flex;
@@ -27,7 +27,7 @@
 }
 
 .coffee--form>fieldset>input, .coffee--form>fieldset>textarea{
-    width: 300px;
+    width: 100%;
     text-indent: 5px;
     border: none;
     border-bottom: 2px solid rgb(212, 193, 16);

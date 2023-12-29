@@ -48,8 +48,9 @@ export default function Register(){
             <form onSubmit={submitRegister} className="register--form">
                 <fieldset style={{border: "3px solid rgb(212, 193, 16)", backgroundColor:"rgba(0,0,0,0.8", maxWidth:"300px"}}>
                     <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>Register</legend>
-                    {passwordNotMatch && <p style={{color: "red"}}>*Confirm password does not match, please try again.</p>}
-                    {currMessage.length>0 &&<p style={{color: "red"}}>{currMessage}</p>}
+                    {passwordNotMatch && <p >*Confirm password does not match, please try again.</p>}
+                    {(currMessage && currMessage.includes(409)) && <p >This user is already created in the database, please try again.</p>}
+                    {(currMessage && !currMessage.includes(409)) && <p >{currMessage}</p>}
                     <label htmlFor="fullName">Full Name:</label>
                     <input type="text" id="fullName" name="fullName" onChange={handleChange} value={registerData.fullName} required/>
                     
@@ -58,7 +59,7 @@ export default function Register(){
 
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" onChange={handleChange} value={registerData.password} required/>
-                    <label htmlFor="confirmPassword">Password:</label>
+                    <label htmlFor="confirmPassword">Confirm Password:</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleChange} value={registerData.confirmPassword} required/>
                     <button type="submit">Register</button>
                 </fieldset>

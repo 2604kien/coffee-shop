@@ -7,7 +7,8 @@ const initialState=authAdapter.getInitialState({
     token:"",
     isAuthenticated: false,
     isAdminAuthorized: false,
-    userRoles:["None"]
+    userRoles:["None"],
+    message:"",
 });
 
 export const login=createAsyncThunk('auth/login', async({username, password})=>{
@@ -33,6 +34,7 @@ const authSlice=createSlice({
         builder.addCase(login.fulfilled,(state, action)=>{
             state.status='succeeded';
             state.token=action.payload;
+            state.message="";
             if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
             else state.isAdminAuthorized=false;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
@@ -53,6 +55,9 @@ const authSlice=createSlice({
             state.token="";
             state.isAuthenticated=false;
             state.isAdminAuthorized=false;
+        }).addCase(login.rejected, (state, action)=>{
+            state.message=action.error.message;
+            console.log(action)
         })
     }
 })
