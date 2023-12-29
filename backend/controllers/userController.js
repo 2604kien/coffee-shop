@@ -37,7 +37,7 @@ const createNewUser=async(req,res,next)=>{
         //add user object to the database;
         const user=await User.create(userObject);
         if(user){
-            return res.status(201).json({message: `User ${fullName} is created`});
+            return res.status(201).json({message: `User ${fullName} is created successfully!`});
         }
         else {
             return res.status(400).json({message: 'Invalid data received'});

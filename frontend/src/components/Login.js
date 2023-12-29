@@ -6,7 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import { login } from "../reducers/authReducer";
 export default function Login(){
     const dispatch=useDispatch();
-    const navigate=useNavigate()
+    const navigate=useNavigate();
+    const message=useSelector(state=>state.auth.message)
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const [loginData, setLoginData]=React.useState({
         username: "",
@@ -25,9 +26,12 @@ export default function Login(){
     const handleSubmit=(e)=>{
         e.preventDefault();
         dispatch(login(loginData)).then(()=>{
-            navigate('/');
+            
         });
     }
+    React.useEffect(()=>{
+        if(isAuthenticated) navigate('/');
+    },[JSON.stringify(isAuthenticated)])
     return (
         <div className="login">
             <div className="logo--login blur" style={{backgroundImage: `url(${LoginIMG})`}}>
@@ -36,6 +40,7 @@ export default function Login(){
             </div>
             <h1>Member Login:</h1>
             <form onSubmit={handleSubmit} className="login--form">
+            {(message && message.includes("401")) && <p >Username/Password is incorrect</p>}
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" name="username" value={loginData.username} onChange={handleChange} placeholder="Please enter your username..." required/>
                 <label htmlFor="password">Password:</label>

@@ -32,3 +32,11 @@
     font-size: 1.6rem;
     transition: all 0.2s ease-in;
 }
+@media only screen and (max-width: 1000px){
+    .navigation-bar>ul>li{
+        font-size: 0.8rem;
+    }
+    .navigation-bar>ul>li:hover{
+        font-size: 1rem;
+    }
+}
