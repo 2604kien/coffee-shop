@@ -1,14 +1,15 @@
 import React from "react";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../reducers/userReducer";
 export default function UserTableCard(props){
     const navigate=useNavigate();
+    const token=useSelector(state=>state.auth.token);
     const dispatch=useDispatch();
     const handleDelete=()=>{
         console.log(props.data._id);
-        dispatch(deleteUser(props.data._id)).then(()=>{
+        dispatch(deleteUser({id:props.data._id, token:token})).then(()=>{
             window.location.reload();
         })
     }

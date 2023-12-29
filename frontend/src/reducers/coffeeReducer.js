@@ -7,24 +7,39 @@ const initialState=coffeeAdapter.getInitialState({
     currCoffeeData:""
 });
 
-export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', async(data)=>{
-    const response=await axios.post("http://localhost:3500/coffee", data)
+export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', async({data, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.post("http://localhost:3500/coffee", data, config)
     return response.data;
 })
-export const getAllCoffeeRecipe=createAsyncThunk('coffee/getAllCoffeeRecipe', async()=>{
-    const response=await axios.get("http://localhost:3500/coffee");
+export const getAllCoffeeRecipe=createAsyncThunk('coffee/getAllCoffeeRecipe', async(token)=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.get("http://localhost:3500/coffee", config);
     return response.data;
 })
-export const fetchCurrCoffeeData=createAsyncThunk('coffee/fetchCurrCoffeeData', async(id)=>{
-    const response=await axios.get(`http://localhost:3500/coffee/${id}`);
+export const fetchCurrCoffeeData=createAsyncThunk('coffee/fetchCurrCoffeeData', async({id, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.get(`http://localhost:3500/coffee/${id}`, config);
     return response.data;
 })
-export const updateCoffeeData=createAsyncThunk('coffee/updateCoffeeData', async(data)=>{
-    const response=await axios.put('http://localhost:3500/coffee/', data);
+export const updateCoffeeData=createAsyncThunk('coffee/updateCoffeeData', async({data, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.put('http://localhost:3500/coffee/', data, config);
     return response.data;
 })
-export const deleteCoffeeById=createAsyncThunk('coffee/deleteCoffeeById', async(id)=>{
-    const response=await axios.delete(`http://localhost:3500/coffee/${id}`);
+export const deleteCoffeeById=createAsyncThunk('coffee/deleteCoffeeById', async({id, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.delete(`http://localhost:3500/coffee/${id}`,config);
     return response.data;
 })
 const coffeeSlice=createSlice({

@@ -8,6 +8,7 @@ import "../css/EditUser.css"
 export default function EditUser(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
+    const token=useSelector(state=>state.auth.token);
     const {id}=useParams();
     const userData=useSelector(state=> state.users.editUserData);
     const [formData, setFormData]=React.useState(userData);
@@ -28,14 +29,14 @@ export default function EditUser(){
     }
 
     const submitRegister=(e)=>{
-        e.preventDefault(); 
-        dispatch(editUser(formData)).then(()=>navigate('/all-users'))
+        e.preventDefault();
+        dispatch(editUser({data:formData, token: token})).then(()=>navigate('/all-users'))
     }
     React.useEffect(()=>{
-        dispatch(getUserById(id)).then(()=>{
+        dispatch(getUserById({id, token})).then(()=>{
             setFormData(userData);
         })
-    },[dispatch, JSON.stringify(userData)])
+    },[dispatch, JSON.stringify(userData), JSON.stringify(token)])
     return(
         <div>
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>

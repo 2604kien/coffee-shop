@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router();
 const multer=require('multer');
-const path=require('path')
 const coffeeController=require('../controllers/coffeeController')
 const verifyJWT=require('../middleware/verifyJWT');
-const Coffee=require('../models/Coffee');
+const verifyRoles=require('../middleware/verifyRole');
+const ROLE_LIST=require('../config/role_list');
 const storage=multer.diskStorage({
     destination: (req, file, cb)=>{
         cb( null, 'public/images')
@@ -17,12 +17,12 @@ const upload=multer({
     storage:storage
 })
 router.route('/')
-    .get(coffeeController.getAllCoffeeInfo)
-    .post(upload.single('imageFile'), coffeeController.createNewCoffee)
-    .put(coffeeController.updateCoffeeData)
+    .get(verifyJWT, coffeeController.getAllCoffeeInfo)
+    .post(verifyJWT, verifyRoles(ROLE_LIST.Admin), upload.single('imageFile'), coffeeController.createNewCoffee)
+    .put(verifyJWT, verifyRoles(ROLE_LIST.Admin),coffeeController.updateCoffeeData)
     
 router.route('/:id')
-    .get(coffeeController.getOneCoffeeInfo)
-    .delete(coffeeController.deleteCoffeeById)
+    .get(verifyJWT, coffeeController.getOneCoffeeInfo)
+    .delete(verifyJWT, verifyRoles(ROLE_LIST.Admin),coffeeController.deleteCoffeeById)
 
 module.exports=router

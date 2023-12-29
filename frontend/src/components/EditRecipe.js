@@ -6,6 +6,7 @@ import BookingPNG from "../images/Booking.png";
 import { useParams, useNavigate } from "react-router-dom";
 export default function EditRecipe(){
     const navigate=useNavigate();
+    const token=useSelector(state=>state.auth.token);
     const recipeData=useSelector(state=>state.coffee.currCoffeeData)
     const dispatch=useDispatch();
     const {id}=useParams();
@@ -25,15 +26,15 @@ export default function EditRecipe(){
             recipe: formData.recipe,
             id: formData._id
         }
-        dispatch(updateCoffeeData(dataObject)).then(()=>{
+        dispatch(updateCoffeeData({data: dataObject, token:token})).then(()=>{
             navigate('/recipe');
         });
     }
     React.useEffect(()=>{
-        dispatch(fetchCurrCoffeeData(id)).then(()=>{
+        dispatch(fetchCurrCoffeeData({id, token})).then(()=>{
             setFormData(recipeData);
         });
-    },[dispatch, JSON.stringify(recipeData)])
+    },[dispatch, JSON.stringify(recipeData), JSON.stringify(token)]);
     return (
         <div >
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>

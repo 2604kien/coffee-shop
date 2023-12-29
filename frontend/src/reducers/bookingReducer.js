@@ -10,6 +10,7 @@ export const addNewBooking=createAsyncThunk('booking/addNewBooking', async(booki
     return response.data;
 })
 export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token)=>{
+    
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
