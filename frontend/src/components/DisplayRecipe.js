@@ -9,9 +9,8 @@ export default function DisplayRecipe(){
     const dispatch=useDispatch();
     const {id}=useParams();
     React.useEffect(()=>{
-        console.log(recipeData.recipe)
         dispatch(fetchCurrCoffeeData(id));
-    },[])
+    },[dispatch])
     return (
         <div >
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>

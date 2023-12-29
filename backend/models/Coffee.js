@@ -5,8 +5,7 @@ const coffeeSchema= new mongoose.Schema({
         required: true
     },
     recipe:{
-        type:String,
-        required: true
+        type:String
     },
     imageName:{
         type: String

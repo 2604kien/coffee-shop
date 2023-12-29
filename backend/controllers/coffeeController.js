@@ -17,7 +17,7 @@ const getAllCoffeeInfo=async (req,res,next)=>{
 const getOneCoffeeInfo=async(req, res, next)=>{
     const {id}=req.params;
     try{
-        const foundedCoffee= await Coffee.findById(id).select("-_id -__v").exec();
+        const foundedCoffee= await Coffee.findById(id).select("-__v").exec();
         if(!foundedCoffee){
             return res.status(400).json({message: "No Coffee recipe found"});
         }
@@ -30,7 +30,6 @@ const getOneCoffeeInfo=async(req, res, next)=>{
 
 const createNewCoffee=async(req,res, next)=>{
     const {itemName, recipe, imageName}=req.body;
-    console.log(itemName, recipe, imageName);
     if(!itemName||!recipe){
         return res.json({message: "All field is required"});
     }
@@ -51,8 +50,24 @@ const createNewCoffee=async(req,res, next)=>{
         return res.status(400).json({message: 'Invalid data recieved.'})
     }
 }
+const updateCoffeeData=async(req,res,next)=>{
+    const {recipe, id}=req.body;
+    try{
+        if(!id) return res.status(400).json({message: "Recipe data required"});
+        const foundedRecipe=await Coffee.findById(id).exec();
+        if(!foundedRecipe) return res.json({message: "Recipe not found"});
+        foundedRecipe.recipe=recipe;
+        const result=await foundedRecipe.save();
+        res.json(result);
+    }
+    catch(err){
+        next(err)
+    }
+
+}
 module.exports={
     getAllCoffeeInfo,
     createNewCoffee,
-    getOneCoffeeInfo
+    getOneCoffeeInfo,
+    updateCoffeeData
 };
