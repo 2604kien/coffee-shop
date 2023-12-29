@@ -1,7 +1,9 @@
 import React from "react";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import { deleteCoffeeById } from "../reducers/coffeeReducer";
 export default function DisplayCoffeeCard(props){
+    const dispatch=useDispatch();
     const navigate=useNavigate();
     const isAdminAuthorized=useSelector(state=> state.auth.isAdminAuthorized);
     const handleClickView=()=>{
@@ -10,13 +12,16 @@ export default function DisplayCoffeeCard(props){
     const handleClickEdit=()=>{
         navigate(`/recipe/edit/${props.data._id}`)
     }
+    const handleClickDelete=()=>{
+        dispatch(deleteCoffeeById(props.data._id))
+    }
     const element= isAdminAuthorized?(<div style={{
         display: "flex",
         flexDirection: "row"
     }}>
         <button onClick={handleClickView} className="small-button">View</button>
         <button onClick={handleClickEdit} className="small-button">Edit</button>
-        <button className="small-button">Delete</button>
+        <button onClick={handleClickDelete} className="small-button">Delete</button>
     </div>):(<button onClick={handleClickView} className="small-button">View</button>)
     return(
         <tr>
