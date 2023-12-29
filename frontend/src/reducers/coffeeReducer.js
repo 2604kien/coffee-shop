@@ -19,6 +19,10 @@ export const fetchCurrCoffeeData=createAsyncThunk('coffee/fetchCurrCoffeeData', 
     const response=await axios.get(`http://localhost:3500/coffee/${id}`);
     return response.data;
 })
+export const updateCoffeeData=createAsyncThunk('coffee/updateCoffeeData', async(data)=>{
+    const response=await axios.put('http://localhost:3500/coffee/', data);
+    return response.data;
+})
 const coffeeSlice=createSlice({
     name:'coffee',
     initialState: initialState,

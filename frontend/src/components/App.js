@@ -13,6 +13,7 @@ import BookingList from "./BookingList";
 import DisplayRecipe from "./DisplayRecipe";
 import AllUser from "./AllUser";
 import EditUser from "./EditUser";
+import EditRecipe from "./EditRecipe";
 function App() {
   return (
       <Routes>
@@ -22,6 +23,7 @@ function App() {
           <Route path="register" element={<Register/>}/>
           <Route path="recipe" element={<DisplayCoffeeReceip/>}/>
           <Route path="recipe/:id" element={<DisplayRecipe/>}/>
+          <Route path="recipe/edit/:id" element={<EditRecipe/>}/>
           <Route path="add-recipe" element={<AddCoffeeRecipe/>}/>
           <Route path="booking" element={<Booking/>}/>
           <Route path="all-users" element={<AllUser/>}/>
