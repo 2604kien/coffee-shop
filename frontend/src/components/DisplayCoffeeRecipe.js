@@ -28,7 +28,7 @@ export default function DisplayCoffeeReceip(){
             fontSize: "1.2rem"
         }}
         onClick={()=>navigate("/add-recipe")}>ADD</button>}
-            <fieldset className="booking--table--container">
+            <fieldset className="booking--table--container" style={{width:"524px"}}>
                     <legend>Coffee Recipe</legend>
                     <table className="booking--table">
                         <thead>

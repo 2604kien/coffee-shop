@@ -20,7 +20,9 @@ router.route('/')
     .get(coffeeController.getAllCoffeeInfo)
     .post(upload.single('imageFile'), coffeeController.createNewCoffee)
     .put(coffeeController.updateCoffeeData)
+    
 router.route('/:id')
-    .get(coffeeController.getOneCoffeeInfo);
+    .get(coffeeController.getOneCoffeeInfo)
+    .delete(coffeeController.deleteCoffeeById)
 
 module.exports=router

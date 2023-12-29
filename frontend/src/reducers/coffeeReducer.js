@@ -23,6 +23,10 @@ export const updateCoffeeData=createAsyncThunk('coffee/updateCoffeeData', async(
     const response=await axios.put('http://localhost:3500/coffee/', data);
     return response.data;
 })
+export const deleteCoffeeById=createAsyncThunk('coffee/deleteCoffeeById', async(id)=>{
+    const response=await axios.delete(`http://localhost:3500/coffee/${id}`);
+    return response.data;
+})
 const coffeeSlice=createSlice({
     name:'coffee',
     initialState: initialState,

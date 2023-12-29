@@ -1,5 +1,7 @@
 const mongoose=require('mongoose');
 const Coffee=require('../models/Coffee');
+const fsPromise=require('fs').promises;
+const path=require('path');
 
 const getAllCoffeeInfo=async (req,res,next)=>{
     try{
@@ -50,6 +52,21 @@ const createNewCoffee=async(req,res, next)=>{
         return res.status(400).json({message: 'Invalid data recieved.'})
     }
 }
+const deleteCoffeeById=async(req,res,next)=>{
+    const {id}=req.params;
+    try{
+        if(!id) return res.status(400).json({message: "Id required"});
+        const foundedCoffee=await Coffee.findById(id).exec();
+        const imageName=foundedCoffee.imageName;
+        await fsPromise.unlink(path.join(__dirname, "..", "public", "images", imageName));
+        const result=await Coffee.deleteOne(foundedCoffee).exec();
+        res.json(result);
+    }
+    catch(err){
+        console.log(err);
+    }
+
+}
 const updateCoffeeData=async(req,res,next)=>{
     const {recipe, id}=req.body;
     try{
@@ -69,5 +86,6 @@ module.exports={
     getAllCoffeeInfo,
     createNewCoffee,
     getOneCoffeeInfo,
-    updateCoffeeData
+    updateCoffeeData,
+    deleteCoffeeById
 };
