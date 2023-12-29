@@ -50,12 +50,11 @@ const createNewUser=async(req,res,next)=>{
     }
 }
 const updateUser=async(req,res,next)=>{
-    const {username, password, roles, fullName}=req.body;
+    const {username, roles, fullName}=req.body;
     try{
         const foundedUsers=await User.findOne({username: username}).exec();
         if(!foundedUsers) return res.json({message: "No user found."})
         foundedUsers.username=username;
-        foundedUsers.password=await bcrypt.hash(password, 10);
         foundedUsers.roles=roles;
         foundedUsers.fullName=fullName;
         const result=await foundedUsers.save();
@@ -69,21 +68,21 @@ const updateUser=async(req,res,next)=>{
 const getUserById=async(req,res,next)=>{
     const {id}=req.params;
     if(!id) return res.status(400).json({message: "User Id required"});
-    const foundedUsers=await User.findById(id).lean().exec();
+    const foundedUsers=await User.findById(id).select('-__v -password').lean().exec();
     if(!foundedUsers) res.json({message:"No user found"});
     res.json({message: "Retrieved data successfully", data: foundedUsers});
 }
 const deleteUser=async(req,res,next)=>{
-    const {id}=req.body;
+    const {id}=req.params;
     try{
         if(!id) return res.status(400).json({message: "User Id required"});
-        const foundedUsers=await User.findById(id).lean().exec;
+        const foundedUsers=await User.findById(id).exec();
         if(!foundedUsers) res.json({message:"No user found"});
-        const result=User.deleteOne({_id:id});
+        const result=await User.deleteOne({_id:id});
         res.json(result);
     }
     catch(err){
-
+        next(err);
     }
 }
 module.exports={
