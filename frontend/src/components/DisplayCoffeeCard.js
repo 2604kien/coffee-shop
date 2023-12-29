@@ -5,6 +5,7 @@ import { deleteCoffeeById } from "../reducers/coffeeReducer";
 export default function DisplayCoffeeCard(props){
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const token=useSelector(state=>state.auth.token);
     const isAdminAuthorized=useSelector(state=> state.auth.isAdminAuthorized);
     const handleClickView=()=>{
         navigate(`/recipe/${props.data._id}`)
@@ -13,7 +14,9 @@ export default function DisplayCoffeeCard(props){
         navigate(`/recipe/edit/${props.data._id}`)
     }
     const handleClickDelete=()=>{
-        dispatch(deleteCoffeeById(props.data._id))
+        dispatch(deleteCoffeeById({id:props.data._id, token:token})).then(()=>{
+            window.location.reload();
+        })
     }
     const element= isAdminAuthorized?(<div style={{
         display: "flex",

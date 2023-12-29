@@ -7,6 +7,7 @@ import BookingPNG from "../images/Booking.png";
 export default function CoffeeRecipe(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const token=useSelector(state=>state.auth.token);
     const [imageFile, setImageFile]=React.useState(null);
     const [formData, setFormData]=React.useState({
        itemName:"",
@@ -21,7 +22,7 @@ export default function CoffeeRecipe(){
         newFormData.append('recipe', formData.recipe);
         newFormData.append('imageName', formData.imageName);
         console.log(formData);
-        dispatch(addNewCoffeeRecipe(newFormData)).then(()=>{
+        dispatch(addNewCoffeeRecipe({data: newFormData, token:token})).then(()=>{
             alert('A coffee recipe is created.');
             window.location.reload();
         })

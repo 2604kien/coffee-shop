@@ -7,6 +7,6 @@ const ROLE_LIST=require('../config/role_list');
 router.route('/')
 .get(verifyJWT, verifyRoles(ROLE_LIST.Admin), bookingController.getAllBooking)
 .post(bookingController.addNewBooking)
-router.route('/:id').delete(verifyJWT,bookingController.deleteOneBooking)
+router.route('/:id').delete(verifyJWT,verifyRoles(ROLE_LIST.Admin),bookingController.deleteOneBooking)
 
 module.exports=router

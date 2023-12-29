@@ -50,9 +50,9 @@ const createNewUser=async(req,res,next)=>{
     }
 }
 const updateUser=async(req,res,next)=>{
-    const {username, roles, fullName}=req.body;
+    const {username, roles, fullName, _id}=req.body;
     try{
-        const foundedUsers=await User.findOne({username: username}).exec();
+        const foundedUsers=await User.findById(_id).exec();
         if(!foundedUsers) return res.json({message: "No user found."})
         foundedUsers.username=username;
         foundedUsers.roles=roles;

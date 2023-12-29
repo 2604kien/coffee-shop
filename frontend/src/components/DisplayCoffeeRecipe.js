@@ -8,13 +8,14 @@ import Error404 from "./Error404";
 export default function DisplayCoffeeReceip(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
+    const token=useSelector(state=>state.auth.token);
     const arrayRecipe=useSelector(state=>state.coffee.entities);
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const element=Array.isArray(arrayRecipe)? arrayRecipe.map(el=><DisplayCoffeeCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{
-        dispatch(getAllCoffeeRecipe())
-    },[dispatch])
+        dispatch(getAllCoffeeRecipe(token))
+    },[dispatch, JSON.stringify(token)])
     if(!isAuthenticated) return <Error404/>
     return(
         <div>

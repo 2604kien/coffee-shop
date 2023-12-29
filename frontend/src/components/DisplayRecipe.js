@@ -7,10 +7,11 @@ import { useParams } from "react-router-dom";
 export default function DisplayRecipe(){
     const recipeData=useSelector(state=>state.coffee.currCoffeeData)
     const dispatch=useDispatch();
+    const token=useSelector(state=>state.auth.token)
     const {id}=useParams();
     React.useEffect(()=>{
-        dispatch(fetchCurrCoffeeData(id));
-    },[dispatch])
+        dispatch(fetchCurrCoffeeData({id, token}));
+    },[dispatch, JSON.stringify(token)])
     return (
         <div >
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
