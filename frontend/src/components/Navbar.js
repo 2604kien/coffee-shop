@@ -28,12 +28,14 @@ export default function Navbar(){
         <>
         <div className="navigation-bar">
             <ul style={{backgroundColor: isScroll>0? "white":"transparent", transition:"all 0.3s ease"}}>
-                <li onClick={()=>{navigate('/')}} style={{fontWeight:"bold", fontSize:"2rem"}}>HIASE</li>
+                <li onClick={()=>{navigate('/')}} style={{fontWeight:"bold", fontSize:"2rem", width:"30%"}}>HIASE</li>
+                <div className="window--nav" >
                 <li onClick={()=>{navigate('/')}}>Home</li>
-                {isAuthenticated && <li onClick={()=>navigate('/recipe')}>Coffe Recipe</li>}
-                {isAdminAuthorized && isAuthenticated?<li onClick={()=>navigate('/booking-list')}>Booking List</li>: <li onClick={()=>navigate('/menu')}>Today's Menu</li>}
-                {isAdminAuthorized && isAuthenticated?<li onClick={()=>navigate('/all-users')}>All Users</li>:<li onClick={()=>navigate('/booking')}>Booking</li>}
-                {isAuthenticated?<li onClick={handleLogout}>Logout</li>: <li onClick={()=>navigate('/login')}>Login</li>}
+                    {isAuthenticated && <li onClick={()=>navigate('/recipe')}>Coffe Recipe</li>}
+                    {isAdminAuthorized && isAuthenticated?<li onClick={()=>navigate('/booking-list')}>Booking List</li>: <li onClick={()=>navigate('/menu')}>Today's Menu</li>}
+                    {isAdminAuthorized && isAuthenticated?<li onClick={()=>navigate('/all-users')}>All Users</li>:<li onClick={()=>navigate('/booking')}>Booking</li>}
+                    {isAuthenticated?<li onClick={handleLogout}>Logout</li>: <li onClick={()=>navigate('/login')}>Login</li>}
+                </div>
             </ul>
         </div>
         </>

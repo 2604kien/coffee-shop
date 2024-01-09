@@ -38,14 +38,16 @@ export default function EditRecipe(){
     return (
         <div >
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
+            <div class="booking--container">
             <form onSubmit={handleSubmit}>
                 <fieldset className="recipe--individual">
-                        <legend>{recipeData.itemName}</legend>
+                        <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>{recipeData.itemName}</legend>
                         <img src={`http://localhost:3500/images/${recipeData.imageName}`} style={{width: "50%"}}/>
                         <textarea className="edit--coffee" name="recipe" onChange={handleFormChange} value={formData.recipe}/>
                         <button className="submit--button">Submit</button>
                 </fieldset>
             </form>
+        </div>
         </div>
     )
 }

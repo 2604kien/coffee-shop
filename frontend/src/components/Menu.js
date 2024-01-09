@@ -6,15 +6,17 @@ export default function Menu(){
     return(
         <div>
             <div className="booking--list" style={{backgroundImage:`url(${BookingPNG})`}} ></div>
+            <div class="booking--container">
             <div style={{
-                position:"fixed",
-                top: "6%",
-                left: "10%",
+                width:"80vw",
                 padding: "20px",
                 backgroundColor:"rgba(0,0,0,0.5",
                 border: "3px solid rgb(212, 193, 16)"
             }}>
-                <img src={MenuIMG} />
+                <img style={{
+                    width:"100%"
+                }} src={MenuIMG} />
+            </div>
             </div>
         </div>
     )

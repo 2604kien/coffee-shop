@@ -32,6 +32,7 @@ export default function Booking(){
     return (
         <div>
         <div className="booking" style={{backgroundImage:`url(${BookingPNG})`}}></div>
+        <div className="booking--container">
          <form className="booking--form" onSubmit={handleSubmit}>
             <fieldset>
                 <legend className="booking--text">Booking</legend>
@@ -46,6 +47,7 @@ export default function Booking(){
                 <button>Submit</button>
             </fieldset>
          </form>
+         </div>
          </div>
     )
 }

@@ -19,8 +19,9 @@ export default function BookingList(){
     return(
         <div>
             <div className="booking--list" style={{backgroundImage:`url(${BookingPNG})`}} ></div>
+            <div class="booking--container">
             <fieldset className="booking--table--container">
-                <legend>All Booking</legend>
+                <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>All Booking</legend>
                 <table className="booking--table">
                     <thead>
                         <tr>
@@ -36,6 +37,7 @@ export default function BookingList(){
                     </tbody>
                 </table>
             </fieldset>
+            </div>
         </div>
     )
 }

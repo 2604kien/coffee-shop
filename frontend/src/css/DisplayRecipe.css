@@ -9,9 +9,8 @@
     padding: 25px;
     gap: 10px;
     background-color: rgba(0,0,0,0.5);
-    position: absolute;
-    top: 10%;
-    left: 20%;
+    z-index: 500;
+
     width: 60%;
 }
 .recipe--individual>legend{
