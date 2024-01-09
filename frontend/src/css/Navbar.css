@@ -89,10 +89,10 @@
     cursor: pointer;
 }
 .open{
-    height: 150px;
+    height: 170px;
     visibility: visible;
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1300px){
     .window--nav{
         display: none;
     }
