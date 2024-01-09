@@ -20,11 +20,16 @@
     left: 50%;
     font-size: 3rem;
 }
-.booking--form{
-
+.booking--container{
     position: absolute;
-    top: 25%;
-    left: 40%;
+    top: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+    padding-bottom: 10%;
 }
 .booking--form>fieldset{
     display: flex;

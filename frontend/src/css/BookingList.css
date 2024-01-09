@@ -12,7 +12,7 @@
 .booking--table--container{
     display: flex;
     flex-direction: column;
-    text-align: left;
+    align-items: center;
     justify-content: center;
     color: rgb(212, 193, 16);
     font-size: 1.2rem;
@@ -20,9 +20,7 @@
     padding: 25px;
     gap: 10px;
     background-color: rgba(0,0,0,0.5);
-    position: absolute;
-    top: 25%;
-    left: 25%;
+
 }
 .booking--table--container>legend{
     font-size: 3rem;

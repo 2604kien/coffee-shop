@@ -16,6 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-position: center;
 }
 .logo--login>h1{
     color: rgb(212, 193, 16);

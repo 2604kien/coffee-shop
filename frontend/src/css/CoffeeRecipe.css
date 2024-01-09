@@ -8,11 +8,6 @@
     background-position: center;
     position: fixed;
 }
-.coffee--form{
-    position: absolute;
-    top: 15%;
-    left: 32%;
-}
 .coffee--form>fieldset{
     display: flex;
     flex-direction: column;

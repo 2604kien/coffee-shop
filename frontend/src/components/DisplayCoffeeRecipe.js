@@ -19,18 +19,15 @@ export default function DisplayCoffeeReceip(){
     if(!isAuthenticated) return <Error404/>
     return(
         <div>
-       
+
         <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
+        
+        <div className="booking--container">
         <div className="coffee--form">  
-        {isAdminAuthorized &&<button className="small-button" style={{
-            position:"absolute",
-            right: -578,
-            zIndex:"1000",
-            fontSize: "1.2rem"
-        }}
-        onClick={()=>navigate("/add-recipe")}>ADD</button>}
-            <fieldset className="booking--table--container" style={{width:"524px"}}>
-                    <legend>Coffee Recipe</legend>
+        {isAdminAuthorized &&<button className="small-button"onClick={()=>navigate("/add-recipe")}>ADD</button>}
+        
+            <fieldset className="booking--table--container">
+                    <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>Coffee Recipe</legend>
                     <table className="booking--table">
                         <thead>
                             <tr>
@@ -44,6 +41,7 @@ export default function DisplayCoffeeReceip(){
                         </tbody>
                     </table>
             </fieldset>
+        </div>
         </div>
         </div>
     )

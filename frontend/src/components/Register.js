@@ -52,15 +52,15 @@ export default function Register(){
                     {(currMessage && currMessage.includes(409)) && <p >This user is already created in the database, please try again.</p>}
                     {(currMessage && !currMessage.includes(409)) && <p >{currMessage}</p>}
                     <label htmlFor="fullName">Full Name:</label>
-                    <input type="text" id="fullName" name="fullName" onChange={handleChange} value={registerData.fullName} required/>
+                    <input type="text" id="fullName" name="fullName" onChange={handleChange} value={registerData.fullName} placeholder="Please enter your full name..."required/>
                     
                     <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" name="username" onChange={handleChange} value={registerData.username} required/>
+                    <input type="text" id="username" name="username" onChange={handleChange} value={registerData.username} placeholder="Please enter your username..."required/>
 
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" onChange={handleChange} value={registerData.password} required/>
+                    <input type="password" id="password" name="password" onChange={handleChange} value={registerData.password} placeholder="Please enter your password..."required/>
                     <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleChange} value={registerData.confirmPassword} required/>
+                    <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleChange} value={registerData.confirmPassword} placeholder="Please enter your confirm password..."required/>
                     <button type="submit">Register</button>
                 </fieldset>
             </form>

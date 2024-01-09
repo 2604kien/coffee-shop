@@ -40,6 +40,7 @@ export default function EditUser(){
     return(
         <div>
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
+            <div class="booking--container">
             <form onSubmit={submitRegister} className="coffee--form">
                 <fieldset style={{border: "3px solid rgb(212, 193, 16)", backgroundColor:"rgba(0,0,0,0.8", maxWidth:"300px"}}>
                     <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>Edit User</legend>
@@ -62,6 +63,7 @@ export default function EditUser(){
                     <button type="submit">Submit</button>
                 </fieldset>
             </form>
+        </div>
         </div>
     )
 }
