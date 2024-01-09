@@ -12,7 +12,6 @@ export default function Navbar(){
     const isAuthenticated=useSelector(state=> state.auth.isAuthenticated);
     const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const [isScroll, setIsScroll]=React.useState(false);
-    console.log(pathname);
     const [dropDown, setDropDown]=React.useState(false);
     React.useEffect(()=>{
         const handleScroll=()=>{
