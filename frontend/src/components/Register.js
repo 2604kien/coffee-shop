@@ -2,11 +2,9 @@ import React from "react";
 import LoginIMG from "../images/Login.png";
 import "../css/Register.css";
 import {useDispatch,useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom'
 import { postNewUser } from "../reducers/userReducer";
 export default function Register(){
     const dispatch=useDispatch();
-    const navigate=useNavigate();
     const message=useSelector(state=>state.users.message)
     const [currMessage, setCurrMessage]=React.useState(message);
     const [registerData, setRegisterData]=React.useState({
