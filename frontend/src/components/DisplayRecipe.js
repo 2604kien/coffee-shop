@@ -10,7 +10,7 @@ export default function DisplayRecipe(){
     const token=useSelector(state=>state.auth.token)
     const {id}=useParams();
     React.useEffect(()=>{
-        dispatch(fetchCurrCoffeeData({id, token}));
+        dispatch(fetchCurrCoffeeData({id, token}))
     },[dispatch, id, token]);
     return (
         <div >
