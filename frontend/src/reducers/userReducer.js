@@ -3,6 +3,7 @@ import axios from "axios"
 const userAdapter=createEntityAdapter();
 const initialState=userAdapter.getInitialState({
     message:"",
+    status:"idle",
     editUserData:{
             _id: "",
             username: "",
@@ -50,17 +51,55 @@ const userSlice=createSlice({
     reducers:{},
     extraReducers: (builder)=>{
         builder.addCase(postNewUser.fulfilled, (state, action)=>{
-           state.message=action.payload.message;            
+           state.message=action.payload.message;
+           state.status='succeeded';
+        })
+        .addCase(postNewUser.pending, (state, action)=>{
+            state.status='loading';
         })
         .addCase(postNewUser.rejected, (state, action)=>{
             state.message=action.error.message;
+            state.status='idle';
         })
         .addCase(getAllUser.fulfilled, (state,action)=>{
             state.entities=action.payload.data;
+            state.status='succeeded';
+        })
+        .addCase(getAllUser.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(getAllUser.rejected, (state, action)=>{
+            state.status='idle';
         })
         .addCase(getUserById.fulfilled, (state, action)=>{
             state.editUserData=action.payload.data;
+            state.status='succeeded';
         })
+        .addCase(getUserById.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(getUserById.rejected, (state, action)=>{
+            state.status='idle';
+        })
+        .addCase(editUser.fulfilled, (state, action)=>{
+            state.status='succeeded';
+        })
+        .addCase(editUser.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(editUser.rejected, (state, action)=>{
+            state.status='idle';
+        })
+        .addCase(deleteUser.fulfilled, (state, action)=>{
+            state.status='succeeded';
+        })
+        .addCase(deleteUser.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(deleteUser.rejected, (state, action)=>{
+            state.status='idle';
+        })
+        
     }
 })
 export default userSlice.reducer;

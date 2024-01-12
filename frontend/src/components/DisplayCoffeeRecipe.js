@@ -5,10 +5,13 @@ import DisplayCoffeeCard from "./DisplayCoffeeCard";
 import { getAllCoffeeRecipe } from "../reducers/coffeeReducer";
 import { useNavigate } from "react-router-dom";
 import Error404 from "./Error404";
+import Loading from "./Loading";
 export default function DisplayCoffeeReceip(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const token=useSelector(state=>state.auth.token);
+    const status=useSelector(state=>state.coffee.status);
+    const [loading, setLoading]=React.useState(false);
     const arrayRecipe=useSelector(state=>state.coffee.entities);
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
@@ -16,10 +19,14 @@ export default function DisplayCoffeeReceip(){
     React.useEffect(()=>{
         dispatch(getAllCoffeeRecipe(token))
     },[dispatch, token]);
+    React.useEffect(()=>{
+        if(status==="loading") setLoading(true);
+        else setLoading(false);
+    },[status])
     if(!isAuthenticated) return <Error404/>
     return(
         <div>
-
+        {loading && <Loading/>}
         <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
         
         <div className="booking--container">

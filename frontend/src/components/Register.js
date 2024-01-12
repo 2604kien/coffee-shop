@@ -3,8 +3,10 @@ import LoginIMG from "../images/Login.png";
 import "../css/Register.css";
 import {useDispatch,useSelector} from 'react-redux';
 import { postNewUser } from "../reducers/userReducer";
+import Loading from "./Loading";
 export default function Register(){
     const dispatch=useDispatch();
+    const [loading, setLoading]=React.useState(false);
     const message=useSelector(state=>state.users.message)
     const [currMessage, setCurrMessage]=React.useState(message);
     const [registerData, setRegisterData]=React.useState({
@@ -27,18 +29,26 @@ export default function Register(){
             }
         })
     }
-    const submitRegister=(event)=>{
+
+    const submitRegister=async (event)=>{
         event.preventDefault()
         if(registerData.confirmPassword!==registerData.password){
             setPasswordNotMatch(true);
         }
         else{
             setPasswordNotMatch(false);
-            dispatch(postNewUser(registerData))
+            try{
+                setLoading(true);
+                await dispatch(postNewUser(registerData))
+            }
+            finally{
+                setLoading(false);
+            }
         }
     }
     return (
         <div className="register">
+            {loading && <Loading/>}
             <div className="logo--login blur" style={{backgroundImage: `url(${LoginIMG})`}}>
                 <h1>HIASE</h1>
                 <h2>Since 1962</h2>

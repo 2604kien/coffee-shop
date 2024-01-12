@@ -3,10 +3,12 @@ import '../css/Login.css'
 import LoginIMG from "../images/Login.png";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import Loading from "./Loading";
 import { login } from "../reducers/authReducer";
 export default function Login(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const [loading, setLoading]=React.useState(false);
     const message=useSelector(state=>state.auth.message)
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const [loginData, setLoginData]=React.useState({
@@ -23,17 +25,23 @@ export default function Login(){
             }
         })
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit=async (e)=>{
         e.preventDefault();
-        dispatch(login(loginData)).then(()=>{
-            
-        });
+        try{
+            setLoading(true);
+            await dispatch(login(loginData))
+        }
+        finally{
+            setLoading(false);
+        }
     }
     React.useEffect(()=>{
         if(isAuthenticated) navigate('/');
-    },[isAuthenticated])
+    },[isAuthenticated, navigate])
+
     return (
         <div className="login">
+            {loading && <Loading/>}
             <div className="logo--login blur" style={{backgroundImage: `url(${LoginIMG})`}}>
                 <h1>HIASE</h1>
                 <h2>Since 1962</h2>

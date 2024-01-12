@@ -4,7 +4,8 @@ import axios from "axios";
 const coffeeAdapter=createEntityAdapter();
 
 const initialState=coffeeAdapter.getInitialState({
-    currCoffeeData:""
+    currCoffeeData:"",
+    status:"idle"
 });
 
 export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', async({data, token})=>{
@@ -49,10 +50,54 @@ const coffeeSlice=createSlice({
     extraReducers: (builder)=>{
         builder.addCase(getAllCoffeeRecipe.fulfilled, (state, action)=>{
             state.entities=action.payload.data;
+            state.status="succeeded"
         })
+        .addCase(getAllCoffeeRecipe.pending, (state, action)=>{
+            state.status="loading"
+        })
+        .addCase(getAllCoffeeRecipe.rejected, (state, action)=>{
+            state.status="idle"
+        })
+        
         .addCase(fetchCurrCoffeeData.fulfilled, (state, action)=>{
             state.currCoffeeData=action.payload.data;
+            state.status="succeeded"
         })
+        .addCase(fetchCurrCoffeeData.pending, (state, action)=>{
+            state.status="loading"
+        })
+        .addCase(fetchCurrCoffeeData.rejected, (state, action)=>{
+            state.status="idle"
+        })
+        .addCase(addNewCoffeeRecipe.fulfilled, (state, action)=>{
+            state.status='succeeded';
+        })
+        .addCase(addNewCoffeeRecipe.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(addNewCoffeeRecipe.rejected, (state, action)=>{
+            state.status='idle';
+        })
+        .addCase(updateCoffeeData.fulfilled, (state, action)=>{
+            state.status='succeeded';
+        })
+        .addCase(updateCoffeeData.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(updateCoffeeData.rejected, (state, action)=>{
+            state.status='idle';
+        })
+        .addCase(deleteCoffeeById.fulfilled, (state, action)=>{
+            state.status='succeeded';
+        })
+        .addCase(deleteCoffeeById.pending, (state,action)=>{
+            state.status='loading';
+        })
+        .addCase(deleteCoffeeById.rejected, (state, action)=>{
+            state.status='idle';
+        })
+        
+        
     }
 })
 export default coffeeSlice.reducer;

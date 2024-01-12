@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment"
 import {useDispatch, useSelector} from "react-redux";
-import { deleteABooking } from "../reducers/bookingReducer";
+import { deleteABooking, getAllBooking } from "../reducers/bookingReducer";
 export default function BookingTableCard(props){
     const dispatch=useDispatch();
     const token=useSelector(state=> state.auth.token);
@@ -12,8 +12,7 @@ export default function BookingTableCard(props){
             token: token
         }
         await dispatch(deleteABooking(data))
-            alert('A booking is deleted');
-            window.location.reload();
+        await dispatch(getAllBooking(token));
 
     }
     return(

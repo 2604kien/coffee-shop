@@ -5,6 +5,7 @@ import axios from "axios"
 const authAdapter=createEntityAdapter();
 const initialState=authAdapter.getInitialState({
     token:"",
+    status:"idle",
     isAuthenticated: false,
     isAdminAuthorized: false,
     userRoles:["None"],
@@ -40,6 +41,13 @@ const authSlice=createSlice({
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
             state.isAuthenticated=true;
         })
+        .addCase(login.pending, (state, action)=>{
+            state.status="loading";
+        })
+        .addCase(login.rejected, (state, action)=>{
+            state.message=action.error.message;
+            state.status='idle';
+        })
         .addCase(refresh.fulfilled,(state, action)=>{
             state.token=action.payload.accessToken;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
@@ -55,8 +63,6 @@ const authSlice=createSlice({
             state.token="";
             state.isAuthenticated=false;
             state.isAdminAuthorized=false;
-        }).addCase(login.rejected, (state, action)=>{
-            state.message=action.error.message;
         })
     }
 })
