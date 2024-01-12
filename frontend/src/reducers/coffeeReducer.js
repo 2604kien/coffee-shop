@@ -11,35 +11,35 @@ export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', as
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.post("http://localhost:3500/coffee", data, config)
+    const response=await axios.post("https://hiase-api.onrender.com/coffee", data, config)
     return response.data;
 })
 export const getAllCoffeeRecipe=createAsyncThunk('coffee/getAllCoffeeRecipe', async(token)=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get("http://localhost:3500/coffee", config);
+    const response=await axios.get("https://hiase-api.onrender.com/coffee", config);
     return response.data;
 })
 export const fetchCurrCoffeeData=createAsyncThunk('coffee/fetchCurrCoffeeData', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get(`http://localhost:3500/coffee/${id}`, config);
+    const response=await axios.get(`https://hiase-api.onrender.com/coffee/${id}`, config);
     return response.data;
 })
 export const updateCoffeeData=createAsyncThunk('coffee/updateCoffeeData', async({data, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.put('http://localhost:3500/coffee/', data, config);
+    const response=await axios.put('https://hiase-api.onrender.com/coffee/', data, config);
     return response.data;
 })
 export const deleteCoffeeById=createAsyncThunk('coffee/deleteCoffeeById', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.delete(`http://localhost:3500/coffee/${id}`,config);
+    const response=await axios.delete(`https://hiase-api.onrender.com/coffee/${id}`,config);
     return response.data;
 })
 const coffeeSlice=createSlice({
