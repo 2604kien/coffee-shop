@@ -18,7 +18,7 @@ export default function DisplayRecipe(){
             <div className="booking--container">
             <fieldset  className="recipe--individual">
                     <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>{recipeData.itemName}</legend>
-                    <img src={`https://hiase.onrender.com/images/${recipeData.imageName}`} style={{width: "50%"}} alt={recipeData.itemName}/>
+                    <img src={`https://hiase-api.onrender.com/images/${recipeData.imageName}`} style={{width: "50%"}} alt={recipeData.itemName}/>
                     <div>
                         <p>{recipeData.recipe}</p>
                     </div>

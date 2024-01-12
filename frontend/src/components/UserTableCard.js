@@ -7,10 +7,9 @@ export default function UserTableCard(props){
     const navigate=useNavigate();
     const token=useSelector(state=>state.auth.token);
     const dispatch=useDispatch();
-    const handleDelete=()=>{
-        dispatch(deleteUser({id:props.data._id, token:token})).then(()=>{
-            window.location.reload();
-        })
+    const handleDelete= async ()=>{
+        await dispatch(deleteUser({id:props.data._id, token:token}))
+        window.location.reload();
     }
     return(
         <tr>

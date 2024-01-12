@@ -13,10 +13,9 @@ export default function DisplayCoffeeCard(props){
     const handleClickEdit=()=>{
         navigate(`/recipe/edit/${props.data._id}`)
     }
-    const handleClickDelete=()=>{
-        dispatch(deleteCoffeeById({id:props.data._id, token:token})).then(()=>{
+    const handleClickDelete=async ()=>{
+        await dispatch(deleteCoffeeById({id:props.data._id, token:token}))
             window.location.reload();
-        })
     }
     const element= isAdminAuthorized?(<div style={{
         display: "flex",
