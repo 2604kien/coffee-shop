@@ -3,9 +3,11 @@ import "../css/CoffeeRecipe.css"
 import { useSelector, useDispatch } from "react-redux";
 import { addNewCoffeeRecipe} from "../reducers/coffeeReducer";
 import BookingPNG from "../images/Booking.png";
+import Error404 from "./Error404";
 export default function CoffeeRecipe(){
     const dispatch=useDispatch();
     const token=useSelector(state=>state.auth.token);
+    const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const [imageFile, setImageFile]=React.useState(null);
     const [formData, setFormData]=React.useState({
        itemName:"",
@@ -33,6 +35,7 @@ export default function CoffeeRecipe(){
             }
         })
     }
+    if(!isAdminAuthorized) return <Error404/>
     return(
         <div>
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>

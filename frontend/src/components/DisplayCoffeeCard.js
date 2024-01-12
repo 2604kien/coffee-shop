@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import { deleteCoffeeById } from "../reducers/coffeeReducer";
+import { deleteCoffeeById, getAllCoffeeRecipe } from "../reducers/coffeeReducer";
 export default function DisplayCoffeeCard(props){
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -13,9 +13,9 @@ export default function DisplayCoffeeCard(props){
     const handleClickEdit=()=>{
         navigate(`/recipe/edit/${props.data._id}`)
     }
-    const handleClickDelete=async ()=>{
-        await dispatch(deleteCoffeeById({id:props.data._id, token:token}))
-            window.location.reload();
+    const handleClickDelete=()=>{
+        dispatch(deleteCoffeeById({ id: props.data._id, token: token }))
+            .then(() => dispatch(getAllCoffeeRecipe(token)));
     }
     const element= isAdminAuthorized?(<div style={{
         display: "flex",
@@ -27,7 +27,7 @@ export default function DisplayCoffeeCard(props){
     </div>):(<button onClick={handleClickView} className="small-button">View</button>)
     return(
         <tr>
-            <td><img src={`https://hiase-api.onrender.com/images/${props.data.imageName}`} style={{width: "140px"}}/></td>
+            <td><img src={`https://hiase-api.onrender.com/images/${props.data.imageName}`} style={{width: "140px"}} alt={props.data.imageName}/></td>
             <td>{props.data.itemName}</td>
             <td>{element}</td>
         </tr>

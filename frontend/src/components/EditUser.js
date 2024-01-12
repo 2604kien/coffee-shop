@@ -5,11 +5,14 @@ import { getUserById,editUser } from "../reducers/userReducer";
 import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import "../css/EditUser.css"
+import Loading from "./Loading";
 export default function EditUser(){
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const token=useSelector(state=>state.auth.token);
     const {id}=useParams();
+    const status=useSelector(state=>state.users.status);
+    const [loading, setLoading]=React.useState(false);
     const userData=useSelector(state=> state.users.editUserData);
     const [formData, setFormData]=React.useState(userData);
     const handleChange=(e)=>{
@@ -33,12 +36,18 @@ export default function EditUser(){
         dispatch(editUser({data:formData, token: token})).then(()=>navigate('/all-users'))
     }
     React.useEffect(()=>{
+        if(status==="loading") setLoading(true);
+        else setLoading(false);
+    },[status])
+    React.useEffect(()=>{
         dispatch(getUserById({id, token})).then(()=>{
             setFormData(userData);
         })
     },[dispatch, JSON.stringify(userData),token, id])
+
     return(
         <div>
+             {loading && <Loading/>}
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
             <div className="booking--container">
             <form onSubmit={submitRegister} className="coffee--form">

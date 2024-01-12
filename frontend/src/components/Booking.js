@@ -4,21 +4,28 @@ import BookingPNG from "../images/Booking.png";
 import {useDispatch} from "react-redux";
 import { addNewBooking } from "../reducers/bookingReducer";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 export default function Booking(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    const [loading, setLoading]=React.useState(false);
     const [formData, setFormData]=React.useState({
         dateTime:"",
         name:"",
         numPeople:"",
         mobilePhone:""
     });
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
         e.preventDefault();
-        dispatch(addNewBooking(formData)).then(()=>{
+        try{
+            setLoading(true);
+            await dispatch(addNewBooking(formData))
             alert('We recieved your booking request and will contact with you shortly');
             navigate('/');
-        })
+        }
+        finally{
+            setLoading(false);
+        }
     }
     const handleChange=(e)=>{
         const {name, value}=e.target
@@ -31,6 +38,7 @@ export default function Booking(){
     }
     return (
         <div>
+            {loading && <Loading/>}
         <div className="booking" style={{backgroundImage:`url(${BookingPNG})`}}></div>
         <div className="booking--container">
          <form className="booking--form" onSubmit={handleSubmit}>
