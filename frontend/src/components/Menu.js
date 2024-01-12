@@ -15,7 +15,7 @@ export default function Menu(){
             }}>
                 <img style={{
                     width:"100%"
-                }} src={MenuIMG} />
+                }} src={MenuIMG} alt="Coffe shop menu"/>
             </div>
             </div>
         </div>

@@ -31,7 +31,7 @@ export default function Login(){
     }
     React.useEffect(()=>{
         if(isAuthenticated) navigate('/');
-    },[JSON.stringify(isAuthenticated)])
+    },[isAuthenticated])
     return (
         <div className="login">
             <div className="logo--login blur" style={{backgroundImage: `url(${LoginIMG})`}}>
