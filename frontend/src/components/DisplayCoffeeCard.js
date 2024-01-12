@@ -28,7 +28,7 @@ export default function DisplayCoffeeCard(props){
     </div>):(<button onClick={handleClickView} className="small-button">View</button>)
     return(
         <tr>
-            <td><img src={`http://localhost:3500/images/${props.data.imageName}`} style={{width: "140px"}}/></td>
+            <td><img src={`https://hiase-api.onrender.com/images/${props.data.imageName}`} style={{width: "140px"}}/></td>
             <td>{props.data.itemName}</td>
             <td>{element}</td>
         </tr>
