@@ -54,9 +54,14 @@ const authSlice=createSlice({
             if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
             else state.isAdminAuthorized=false;
             state.isAuthenticated=true;
+            state.status="succeeded";
+        })
+        .addCase(refresh.pending, (state, action)=>{
+            state.status="loading";
         })
         .addCase(refresh.rejected, (state, action)=>{
             state.token="";
+            state.status="idle"
             state.isAuthenticated=false;
         })
         .addCase(logout.fulfilled, (state, action)=>{

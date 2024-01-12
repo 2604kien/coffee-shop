@@ -10,9 +10,9 @@ export default function Layout(){
     
     React.useEffect(()=>{
         dispatch(refresh())
-        const tokenExpirationThreshold = 3; 
+        const tokenExpirationThreshold = 3*60; 
         let { exp } = token.length>0?JSON.parse(window.atob(token.split('.')[1])):"";
-        setInterval(()=>{
+        const intervalId = setInterval(()=>{
                 if (exp - Date.now() / 1000 < tokenExpirationThreshold) {
                   // Dispatch the refreshAccessToken action
                   
@@ -21,6 +21,7 @@ export default function Layout(){
                 }
             
         }, 13*60*1000)
+        return () => clearInterval(intervalId);
 },[dispatch,token])
     return (
         <>
