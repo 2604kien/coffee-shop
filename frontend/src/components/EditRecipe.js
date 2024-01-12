@@ -42,7 +42,7 @@ export default function EditRecipe(){
             <form onSubmit={handleSubmit}>
                 <fieldset className="recipe--individual">
                         <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>{recipeData.itemName}</legend>
-                        <img src={`http://localhost:3500/images/${recipeData.imageName}`} style={{width: "50%"}} alt={recipeData.itemName}/>
+                        <img src={`https://hiase.onrender.com/images/${recipeData.imageName}`} style={{width: "50%"}} alt={recipeData.itemName}/>
                         <textarea className="edit--coffee" name="recipe" onChange={handleFormChange} value={formData.recipe}/>
                         <button className="submit--button">Submit</button>
                 </fieldset>
