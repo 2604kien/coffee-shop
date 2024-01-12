@@ -15,7 +15,7 @@ export default function DisplayCoffeeReceip(){
     const element=Array.isArray(arrayRecipe)? arrayRecipe.map(el=><DisplayCoffeeCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{
         dispatch(getAllCoffeeRecipe(token))
-    },[dispatch, JSON.stringify(token)])
+    },[dispatch, token]);
     if(!isAuthenticated) return <Error404/>
     return(
         <div>

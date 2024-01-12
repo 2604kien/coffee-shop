@@ -14,7 +14,7 @@ export default function BookingList(){
     const element=Array.isArray(allBooking)?allBooking.map(el=><BookingTableCard key={el._id} data={el}/>):(<></>)
     React.useEffect(()=>{        
         if(isAuthenticated) dispatch(getAllBooking(token));
-    },[dispatch, token]);
+    },[dispatch, token, isAuthenticated]);
     if(!isAdminAuthorized) return <Error404/>
     return(
         <div>
