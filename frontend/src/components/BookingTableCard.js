@@ -5,16 +5,16 @@ import { deleteABooking } from "../reducers/bookingReducer";
 export default function BookingTableCard(props){
     const dispatch=useDispatch();
     const token=useSelector(state=> state.auth.token);
-    const handleDelete=(e)=>{
+    const handleDelete=async (e)=>{
         e.preventDefault();
         const data={
             id: props.data._id,
             token: token
         }
-        dispatch(deleteABooking(data)).then(()=>{
+        await dispatch(deleteABooking(data))
             alert('A booking is deleted');
             window.location.reload();
-        });
+
     }
     return(
         <tr>
