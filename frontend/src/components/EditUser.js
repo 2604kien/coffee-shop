@@ -36,11 +36,11 @@ export default function EditUser(){
         dispatch(getUserById({id, token})).then(()=>{
             setFormData(userData);
         })
-    },[dispatch, JSON.stringify(userData), JSON.stringify(token)])
+    },[dispatch, JSON.stringify(userData),token, id])
     return(
         <div>
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
-            <div class="booking--container">
+            <div className="booking--container">
             <form onSubmit={submitRegister} className="coffee--form">
                 <fieldset style={{border: "3px solid rgb(212, 193, 16)", backgroundColor:"rgba(0,0,0,0.8", maxWidth:"300px"}}>
                     <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>Edit User</legend>

@@ -1,12 +1,10 @@
 import React from "react";
 import "../css/CoffeeRecipe.css"
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addNewCoffeeRecipe, uploadImage } from "../reducers/coffeeReducer";
+import { addNewCoffeeRecipe} from "../reducers/coffeeReducer";
 import BookingPNG from "../images/Booking.png";
 export default function CoffeeRecipe(){
     const dispatch=useDispatch();
-    const navigate=useNavigate();
     const token=useSelector(state=>state.auth.token);
     const [imageFile, setImageFile]=React.useState(null);
     const [formData, setFormData]=React.useState({
@@ -21,7 +19,6 @@ export default function CoffeeRecipe(){
         newFormData.append('itemName', formData.itemName);
         newFormData.append('recipe', formData.recipe);
         newFormData.append('imageName', formData.imageName);
-        console.log(formData);
         dispatch(addNewCoffeeRecipe({data: newFormData, token:token})).then(()=>{
             alert('A coffee recipe is created.');
             window.location.reload();
@@ -39,6 +36,7 @@ export default function CoffeeRecipe(){
     return(
         <div>
             <div className="coffee-recipe" style={{backgroundImage:`url(${BookingPNG})`}}></div>
+            <div className="booking--container">
             <form className="coffee--form" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend className="booking--text">Add New Coffee Recipe</legend>
@@ -59,6 +57,7 @@ export default function CoffeeRecipe(){
                     <button>Submit</button>
                 </fieldset>
             </form>
+            </div>
         </div>
     )
 }

@@ -8,7 +8,6 @@ export default function UserTableCard(props){
     const token=useSelector(state=>state.auth.token);
     const dispatch=useDispatch();
     const handleDelete=()=>{
-        console.log(props.data._id);
         dispatch(deleteUser({id:props.data._id, token:token})).then(()=>{
             window.location.reload();
         })

@@ -57,7 +57,6 @@ const authSlice=createSlice({
             state.isAdminAuthorized=false;
         }).addCase(login.rejected, (state, action)=>{
             state.message=action.error.message;
-            console.log(action)
         })
     }
 })

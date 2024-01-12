@@ -12,12 +12,12 @@ export default function AllUser(){
     const element=Array.isArray(usersData)?usersData.map(el=><UserTableCard key={el._id} data={el}/>):(<></>);
     React.useEffect(()=>{
         dispatch(getAllUser(token))
-    },[dispatch, JSON.stringify(token)])
+    },[dispatch, token])
     if(!isAdminAuthorized) return <Error404/>
     return(
         <div>
             <div className="booking--list" style={{backgroundImage:`url(${BookingPNG})`}} ></div>
-            <div class="booking--container">
+            <div className="booking--container">
             <fieldset className="booking--table--container">
                 <legend style={{backgroundColor:"rgba(0,0,0,0.5", fontSize:"3rem"}}>All Users</legend>
                 <table className="booking--table">
