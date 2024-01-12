@@ -6,7 +6,7 @@ const bookingAdapter=createEntityAdapter();
 const initialState=bookingAdapter.getInitialState({});
 
 export const addNewBooking=createAsyncThunk('booking/addNewBooking', async(booking)=>{
-    const response=await axios.post("http://localhost:3500/booking", booking);
+    const response=await axios.post("https://hiase-api.onrender.com/booking", booking);
     return response.data;
 })
 export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token)=>{
@@ -14,14 +14,14 @@ export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get("http://localhost:3500/booking",config);
+    const response=await axios.get("https://hiase-api.onrender.com/booking",config);
     return response.data;
 })
 export const deleteABooking=createAsyncThunk('booking/deleteABooking', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response = await axios.delete(`http://localhost:3500/booking/${id}`, config);
+    const response = await axios.delete(`https://hiase-api.onrender.com/booking/${id}`, config);
     return response.data;
 })
 const bookingSlice=createSlice({

@@ -12,16 +12,16 @@ const initialState=authAdapter.getInitialState({
 });
 
 export const login=createAsyncThunk('auth/login', async({username, password})=>{
-    const response=await axios.post("http://localhost:3500/auth/login", {username, password}, { withCredentials: true });
+    const response=await axios.post("https://hiase-api.onrender.com/auth/login", {username, password}, { withCredentials: true });
     return response.data
 })
 
 export const refresh=createAsyncThunk('auth/refresh', async()=>{
-    const response=await axios.post("http://localhost:3500/auth/refresh",{}, { withCredentials: true });
+    const response=await axios.post("https://hiase-api.onrender.com/auth/refresh",{}, { withCredentials: true });
     return response.data
 })
 export const logout=createAsyncThunk('auth/logout', async()=>{
-    const response=await axios.post("http://localhost:3500/auth/logout",{}, { withCredentials: true })
+    const response=await axios.post("https://hiase-api.onrender.com/auth/logout",{}, { withCredentials: true })
     return response.data;
 })
 const authSlice=createSlice({
