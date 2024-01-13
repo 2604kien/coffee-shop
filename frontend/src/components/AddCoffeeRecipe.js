@@ -9,6 +9,7 @@ export default function CoffeeRecipe(){
     const token=useSelector(state=>state.auth.token);
     const isAdminAuthorized=useSelector(state=>state.auth.isAdminAuthorized);
     const [imageFile, setImageFile]=React.useState(null);
+    const [message, setMessage]=React.useState("");
     const [formData, setFormData]=React.useState({
        itemName:"",
        recipe: "",
@@ -22,8 +23,7 @@ export default function CoffeeRecipe(){
         newFormData.append('recipe', formData.recipe);
         newFormData.append('imageName', formData.imageName);
         dispatch(addNewCoffeeRecipe({data: newFormData, token:token})).then(()=>{
-            alert('A coffee recipe is created.');
-            window.location.reload();
+            setMessage('A coffee recipe is created.');
         })
     }
     const handleChange=(e)=>{
