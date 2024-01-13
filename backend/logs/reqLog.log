@@ -1,0 +1,10 @@
+GET	/	undefined
+GET	/favicon.ico	undefined
+POST	/auth/refresh	http://localhost:3000
+POST	/auth/refresh	http://localhost:3000
+POST	/auth/login	http://localhost:3000
+POST	/auth/refresh	http://localhost:3000
+GET	/coffee	http://localhost:3000
+POST	/coffee	http://localhost:3000
+POST	/coffee	http://localhost:3000
+POST	/coffee	http://localhost:3000
