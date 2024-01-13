@@ -1,1 +1,1 @@
-export const serverURL="http://localhost:3500/"
+export const serverURL="https://hiasecoffeehouse-api.online"

@@ -5,3 +5,6 @@ POST	/auth/refresh	http://localhost:3000
 POST	/auth/refresh	http://localhost:3000
 POST	/auth/login	http://localhost:3000
 POST	/auth/refresh	http://localhost:3000
+POST	/auth/refresh	https://www.hiase.cafe
+POST	/auth/refresh	https://www.hiase.cafe
+POST	/auth/refresh	https://www.hiase.cafe
