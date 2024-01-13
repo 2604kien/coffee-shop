@@ -4,5 +4,5 @@ import { rootReducer } from "../reducers";
 export const store=configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware =>getDefaultMiddleware(),
-    devTools: true
+    devTools: false
 })
