@@ -24,7 +24,6 @@ export default function Navbar(){
         
         dispatch(resetState());
         dispatch(logout()).then(()=>{
-            alert('You are succeessfully log out.')
             navigate('/login');
         })
     }

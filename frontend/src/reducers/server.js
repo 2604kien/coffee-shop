@@ -1,1 +1,1 @@
-export const serverURL="https://coffee-shop-eight-rho.vercel.app/"
+export const serverURL="https://hiase-api.onrender.com/"

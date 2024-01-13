@@ -74,7 +74,6 @@ const coffeeSlice=createSlice({
         })
         .addCase(addNewCoffeeRecipe.fulfilled, (state, action)=>{
             state.status='succeeded';
-            console.log(action.payload)
         })
         .addCase(addNewCoffeeRecipe.pending, (state,action)=>{
             state.status='loading';

@@ -9,6 +9,7 @@ export default function Booking(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const [loading, setLoading]=React.useState(false);
+    const [message, setMessage]=React.useState(false);
     const [formData, setFormData]=React.useState({
         dateTime:"",
         name:"",
@@ -20,7 +21,7 @@ export default function Booking(){
         try{
             setLoading(true);
             await dispatch(addNewBooking(formData))
-            alert('We recieved your booking request and will contact with you shortly');
+            setMessage(true);
             navigate('/');
         }
         finally{
@@ -44,6 +45,7 @@ export default function Booking(){
          <form className="booking--form" onSubmit={handleSubmit}>
             <fieldset>
                 <legend className="booking--text">Booking</legend>
+                {message && <p>We recieved your booking request and will contact with you shortly</p>}
                 <label htmlFor="dateTime">Date and Time</label>
                 <input type="datetime-local" id="dateTime" name="dateTime" value={formData.dateTime} onChange={handleChange} required/>
                 <label htmlFor="name">Your Name:</label>
