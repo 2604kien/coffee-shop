@@ -5,7 +5,8 @@ const coffeeAdapter=createEntityAdapter();
 
 const initialState=coffeeAdapter.getInitialState({
     currCoffeeData:"",
-    status:"idle"
+    status:"idle",
+    message:""
 });
 
 export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', async({data, token})=>{
@@ -71,6 +72,7 @@ const coffeeSlice=createSlice({
         })
         .addCase(addNewCoffeeRecipe.fulfilled, (state, action)=>{
             state.status='succeeded';
+            console.log(action.payload)
         })
         .addCase(addNewCoffeeRecipe.pending, (state,action)=>{
             state.status='loading';
