@@ -8,8 +8,9 @@ export default function Layout(){
     const dispatch=useDispatch();
     const token=useSelector(state=> state.auth.token);
     
+    const isLogin=useSelector(state=>state.auth.isLogin);
     React.useEffect(()=>{
-        dispatch(refresh())
+        if(!isLogin) dispatch(refresh())
         const tokenExpirationThreshold = 3*60; 
         let { exp } = token.length>0?JSON.parse(window.atob(token.split('.')[1])):"";
         const intervalId = setInterval(()=>{
@@ -22,7 +23,7 @@ export default function Layout(){
             
         }, 13*60*1000)
         return () => clearInterval(intervalId);
-},[dispatch,token])
+},[dispatch,token, isLogin]);
     return (
         <>
             <Navbar/>

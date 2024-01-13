@@ -8,6 +8,7 @@ const initialState=authAdapter.getInitialState({
     token:"",
     status:"idle",
     isAuthenticated: false,
+    isLogin:false,
     isAdminAuthorized: false,
     userRoles:["None"],
     message:"",
@@ -41,6 +42,7 @@ const authSlice=createSlice({
             else state.isAdminAuthorized=false;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
             state.isAuthenticated=true;
+            state.isLogin=true;
         })
         .addCase(login.pending, (state, action)=>{
             state.status="loading";
@@ -69,6 +71,7 @@ const authSlice=createSlice({
             state.token="";
             state.isAuthenticated=false;
             state.isAdminAuthorized=false;
+            state.isLogin=false;
         })
     }
 })
