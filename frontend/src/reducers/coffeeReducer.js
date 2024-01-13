@@ -13,6 +13,7 @@ const initialState=coffeeAdapter.getInitialState({
 export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', async({data, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
+        
     }
     const response=await axios.post(serverURL+"coffee", data, config)
     return response.data;
