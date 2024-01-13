@@ -39,7 +39,7 @@ const authSlice=createSlice({
             state.message="";
             if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
             else state.isAdminAuthorized=false;
-            state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
+            state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles?JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles:["Member"];
             state.isAuthenticated=true;
         })
         .addCase(login.pending, (state, action)=>{
@@ -51,7 +51,7 @@ const authSlice=createSlice({
         })
         .addCase(refresh.fulfilled,(state, action)=>{
             state.token=action.payload.accessToken;
-            state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
+            state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles?JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles:["Member"];
             if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
             else state.isAdminAuthorized=false;
             state.isAuthenticated=true;
@@ -69,6 +69,12 @@ const authSlice=createSlice({
             state.token="";
             state.isAuthenticated=false;
             state.isAdminAuthorized=false;
+        })
+        .addCase(logout.pending, (state, action)=>{
+            state.status="loading"
+        })
+        .addCase(logout.rejected, (state, action)=>{
+            state.status="idle"
         })
     }
 })
