@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { deleteCoffeeById, getAllCoffeeRecipe } from "../reducers/coffeeReducer";
+import { serverURL } from "../reducers/server";
 export default function DisplayCoffeeCard(props){
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -27,7 +28,7 @@ export default function DisplayCoffeeCard(props){
     </div>):(<button onClick={handleClickView} className="small-button">View</button>)
     return(
         <tr>
-            <td><img src={`https://hiase-api.onrender.com/images/${props.data.imageName}`} style={{width: "140px"}} alt={props.data.imageName}/></td>
+            <td><img src={serverURL+`images/${props.data.imageName}`} style={{width: "140px"}} alt={props.data.imageName}/></td>
             <td>{props.data.itemName}</td>
             <td>{element}</td>
         </tr>
