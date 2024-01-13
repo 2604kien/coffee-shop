@@ -1,5 +1,6 @@
 import { createEntityAdapter, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { serverURL } from "./server";
 
 const coffeeAdapter=createEntityAdapter();
 
@@ -13,35 +14,35 @@ export const addNewCoffeeRecipe=createAsyncThunk('coffee/addNewCoffeeRecipe', as
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.post("https://hiase-api.onrender.com/coffee", data, config)
+    const response=await axios.post(serverURL+"coffee", data, config)
     return response.data;
 })
 export const getAllCoffeeRecipe=createAsyncThunk('coffee/getAllCoffeeRecipe', async(token)=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get("https://hiase-api.onrender.com/coffee", config);
+    const response=await axios.get(serverURL+"coffee", config);
     return response.data;
 })
 export const fetchCurrCoffeeData=createAsyncThunk('coffee/fetchCurrCoffeeData', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get(`https://hiase-api.onrender.com/coffee/${id}`, config);
+    const response=await axios.get(serverURL+`coffee/${id}`, config);
     return response.data;
 })
 export const updateCoffeeData=createAsyncThunk('coffee/updateCoffeeData', async({data, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.put('https://hiase-api.onrender.com/coffee/', data, config);
+    const response=await axios.put(serverURL+'coffee/', data, config);
     return response.data;
 })
 export const deleteCoffeeById=createAsyncThunk('coffee/deleteCoffeeById', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.delete(`https://hiase-api.onrender.com/coffee/${id}`,config);
+    const response=await axios.delete(serverURL+`coffee/${id}`,config);
     return response.data;
 })
 const coffeeSlice=createSlice({

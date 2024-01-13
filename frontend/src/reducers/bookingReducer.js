@@ -1,12 +1,13 @@
 import {createEntityAdapter, createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+import { serverURL } from "./server";
 
 
 const bookingAdapter=createEntityAdapter();
 const initialState=bookingAdapter.getInitialState({});
 
 export const addNewBooking=createAsyncThunk('booking/addNewBooking', async(booking)=>{
-    const response=await axios.post("https://hiase-api.onrender.com/booking", booking);
+    const response=await axios.post(serverURL+"booking", booking);
     return response.data;
 })
 export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token)=>{
@@ -14,14 +15,14 @@ export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get("https://hiase-api.onrender.com/booking",config);
+    const response=await axios.get(serverURL+"booking",config);
     return response.data;
 })
 export const deleteABooking=createAsyncThunk('booking/deleteABooking', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response = await axios.delete(`https://hiase-api.onrender.com/booking/${id}`, config);
+    const response = await axios.delete(serverURL+`booking/${id}`, config);
     return response.data;
 })
 const bookingSlice=createSlice({
