@@ -7,7 +7,7 @@ const verifyRoles=require('../middleware/verifyRole');
 const ROLE_LIST=require('../config/role_list');
 const storage=multer.diskStorage({
     destination: (req, file, cb)=>{
-        cb( null, 'public/images')
+        cb( null, '/images')
     },
     filename: (req,file, cb)=>{
         cb(null, file.originalname)

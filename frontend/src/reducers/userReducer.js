@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import axios from "axios"
+import { serverURL } from "./server";
 const userAdapter=createEntityAdapter();
 const initialState=userAdapter.getInitialState({
     message:"",
@@ -14,35 +15,35 @@ const initialState=userAdapter.getInitialState({
       }
 });
 export const postNewUser= createAsyncThunk('users/postNewUser', async(user)=>{
-    const response=await axios.post("https://hiase-api.onrender.com/users", user);
+    const response=await axios.post(serverURL+"users", user);
     return response.data;
 })
 export const getUserById=createAsyncThunk('users/getUserById', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get(`https://hiase-api.onrender.com/users/${id}`, config);
+    const response=await axios.get(serverURL+`users/${id}`, config);
     return response.data;
 })
 export const editUser=createAsyncThunk('users/editUser', async({data, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.put("https://hiase-api.onrender.com/users",data, config);
+    const response=await axios.put(serverURL+"users",data, config);
     return response.data;
 })
 export const getAllUser=createAsyncThunk('users/getAllUser', async(token)=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.get("https://hiase-api.onrender.com/users",config);
+    const response=await axios.get(serverURL+"users",config);
     return response.data;
 })
 export const deleteUser=createAsyncThunk('users/deleteUser', async({id, token})=>{
     const config={
         headers: {Authorization: `Bearer ${token}`}
     }
-    const response=await axios.delete(`https://hiase-api.onrender.com/users/${id}`, config);
+    const response=await axios.delete(serverURL+`users/${id}`, config);
     return response.data;
 })
 const userSlice=createSlice({

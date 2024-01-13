@@ -23,7 +23,7 @@ export default function CoffeeRecipe(){
         newFormData.append('recipe', formData.recipe);
         newFormData.append('imageName', formData.imageName);
         dispatch(addNewCoffeeRecipe({data: newFormData, token:token})).then(()=>{
-            setMessage('A coffee recipe is created.');
+            alert('A coffee recipe is created.');
         })
     }
     const handleChange=(e)=>{
