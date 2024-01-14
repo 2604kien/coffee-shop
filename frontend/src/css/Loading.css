@@ -7,8 +7,14 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     z-index: 1000;
+}
+.overlay >h3{
+    color:white;
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 .loader {
     width: 48px;
