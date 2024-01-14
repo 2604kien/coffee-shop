@@ -41,6 +41,8 @@ const authSlice=createSlice({
             if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
             else state.isAdminAuthorized=false;
             state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
+            if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
+            else state.isAdminAuthorized=false;
             state.isAuthenticated=true;
             state.isLogin=true;
         })
