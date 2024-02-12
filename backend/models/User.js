@@ -21,6 +21,9 @@ const userSchema=new mongoose.Schema({
         type: String,
         default: Date.now()
     },
+    googleId:{
+        type:String
+    },
     refreshToken:{
         type: String,
     }
