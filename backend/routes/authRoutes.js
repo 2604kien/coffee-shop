@@ -10,12 +10,12 @@ router.route('/refresh')
 router.route('/logout')
     .post(authController.logout)
 router.route('/login/google')
-    .get(passport.authenticate('google', {scope:["profile, email"]}))
-router.route('/auth/google/callback')
+    .get(passport.authenticate('google', {scope:["profile", "email"]}))
+router.route('/google/callback')
 .get(passport.authenticate('google',{
     failureMessage:"Cannot login to Google, please try again later.",
-    failureRedirect:"http://localhost:3000",
-    successRedirect:"http://localhost:3000"
+    failureRedirect:"http://localhost:3000/login",
+    successReturnToOrRedirect:"http://localhost:3000/",
 }),
 (req, res)=>{
     console.log("User: "+req.user);
