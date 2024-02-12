@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express=require('express');
+const passport=require('passport');
 const app=express();
 const connectDB=require('./config/dbConn');
 const path=require('path');
+const session=require('express-session');
 const mongoose=require('mongoose');
 const cors=require('cors')
 const corsOptions=require('./config/corsOptions');
@@ -13,6 +15,14 @@ app.use(cookieParser())
 const PORT=3500;
 connectDB();
 app.use(cors(corsOptions));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.options('*', cors(corsOptions))
 app.use(express.urlencoded({extended: false}));
 app.use(logger);
