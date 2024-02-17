@@ -5,29 +5,35 @@ const app=express();
 const connectDB=require('./config/dbConn');
 const path=require('path');
 const session=require('express-session');
-const MemoryStore = require('memorystore')(session)
 const mongoose=require('mongoose');
 const cors=require('cors')
 const corsOptions=require('./config/corsOptions');
 const cookieParser=require('cookie-parser')
 const {logger, logEvent}=require('./middleware/logger');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 app.use(cookieParser())
 const PORT=3500;
 connectDB();
 app.use(cors(corsOptions));
+const store = new MongoDBStore({
+    uri: process.env.DATABASE_URI,
+    collection: 'sessions'
+});
+
+store.on('error', function(error) {
+    console.error('MongoDB Session Store Error:', error);
+});
 app.use(session({
     secret: process.env.ACCESS_SECRET_TOKEN,
     resave: false,
     name:'google-auth',
     saveUninitialized: false,
+    store: store,
     cookie:{
         httpOnly: true,
         sameSite:'None',
         secure:true,
-        store: new MemoryStore({
-            checkPeriod: 24*60*60*1000
-          }),
         maxAge:24*60*60*1000
     }
 }));
