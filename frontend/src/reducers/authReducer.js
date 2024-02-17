@@ -31,7 +31,7 @@ const authSlice=createSlice({
     name: 'auth',
     initialState,
     reducers:{
-        resetState:(state)=>initialState
+        resetState:(state)=>state=initialState
     },
     extraReducers:(builder)=>{
         builder.addCase(login.fulfilled,(state, action)=>{
