@@ -13,7 +13,7 @@ export default function Login(){
     const message=useSelector(state=>state.auth.message)
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const redirectToSSO=async ()=>{
-        const url=`${serverURL}/auth/login/google`;
+        const url=`${serverURL}auth/login/google`;
         let timer=null;
         const newWindow=window.open(url, "_blank", "width=500, height=600, top=200, left=700");
         if(newWindow){

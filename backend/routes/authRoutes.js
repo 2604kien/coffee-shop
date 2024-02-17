@@ -1,6 +1,7 @@
 const express=require('express')
 const router=express.Router();
 const passport=require('passport');
+const frontend="https://www.hiase.cafe/"
 const authController=require('../controllers/authController');
 require('../controllers/auth/passportGoogleSSO');
 router.route('/login')
@@ -14,8 +15,8 @@ router.route('/login/google')
 router.route('/google/callback')
     .get(passport.authenticate('google',{
         failureMessage:"Cannot login to Google, please try again later.",
-        failureRedirect:"http://localhost:3000/login",
-        successRedirect:"http://localhost:3000/login/success",
+        failureRedirect:`${frontend}login`,
+        successRedirect:`${frontend}login/success`,
     }),
     (req, res)=>{
         console.log("User: "+req.user);
