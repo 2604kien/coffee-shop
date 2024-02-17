@@ -13,7 +13,8 @@ export default function LoginSuccess(){
             alignItems:"center",
             width:"100%",
             height:"100vh",
-            overflow:"hidden"
-        }}>Thank you for login</h1>
+            overflow:"hidden",
+            color:"rgb(212, 193, 16)"
+        }}>Welcome to HIASE!!!</h1>
     )
 }
