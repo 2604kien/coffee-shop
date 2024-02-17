@@ -5,7 +5,7 @@ const app=express();
 const connectDB=require('./config/dbConn');
 const path=require('path');
 const session=require('express-session');
-const cookieSession=require('cookie-session');
+const MemoryStore = require('memorystore')(session)
 const mongoose=require('mongoose');
 const cors=require('cors')
 const corsOptions=require('./config/corsOptions');
@@ -25,6 +25,9 @@ app.use(session({
         httpOnly: true,
         sameSite:'None',
         secure:true,
+        store: new MemoryStore({
+            checkPeriod: 24*60*60*1000
+          }),
         maxAge:24*60*60*1000
     }
 }));
