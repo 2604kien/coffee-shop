@@ -16,6 +16,7 @@ app.use(cookieParser())
 const PORT=3500;
 connectDB();
 app.use(cors(corsOptions));
+app.enable('trust proxy');
 const store = new MongoDBStore({
     uri: process.env.DATABASE_URI,
     collection: 'sessions'
@@ -26,10 +27,11 @@ store.on('error', function(error) {
 });
 app.use(session({
     secret: process.env.ACCESS_SECRET_TOKEN,
-    resave: false,
+    resave: true,
     name:'google-auth',
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: store,
+    proxy: true,
     cookie:{
         maxAge:24*60*60*1000,
         httpOnly:true,
