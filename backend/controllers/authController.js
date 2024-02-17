@@ -107,7 +107,11 @@ const logout = (req, res) => {
     }
 
     // Clear both cookies
-    res.clearCookie('google-auth');
+    res.clearCookie('google-auth',{
+        httpOnly:true,
+        sameSite:'None',
+        secure: true
+    });
     res.clearCookie('jwt', {
         httpOnly: true,
         sameSite: 'None',
