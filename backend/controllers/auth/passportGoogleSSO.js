@@ -1,7 +1,7 @@
 const passport=require('passport');
 const GoogleStrategy=require('passport-google-oauth20').Strategy;
 const User=require('../../models/User');
-const CALLBACK="https://hiasecoffeehouse-api.online/auth/google/callback"
+const CALLBACK="https://www.api.hiase.cafe/auth/google/callback"
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
