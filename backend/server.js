@@ -16,7 +16,7 @@ app.use(cookieParser())
 const PORT=3500;
 connectDB();
 app.use(cors(corsOptions));
-app.enable('trust proxy');
+app.set('trust proxy', 1);
 const store = new MongoDBStore({
     uri: process.env.DATABASE_URI,
     collection: 'sessions'
