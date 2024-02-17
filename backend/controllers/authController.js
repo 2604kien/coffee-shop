@@ -44,10 +44,11 @@ const login=async (req,res)=>{
 
 const refresh=async (req, res)=>{
     const cookies=req.cookies;
+    console.log("User: "+req.user);
     if(!cookies?.jwt && !req.user){
         return res.status(401).json({message: "Unauthorized"});
     }
-    console.log(req.user);
+
     const refreshToken=cookies.jwt;
     if(req.user){
         const foundedUser=await User.findOne({username:req.user.username}).exec();
