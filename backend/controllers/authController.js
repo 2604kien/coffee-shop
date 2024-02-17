@@ -47,6 +47,7 @@ const refresh=async (req, res)=>{
     if(!cookies?.jwt && !req.user){
         return res.status(401).json({message: "Unauthorized"});
     }
+    console.log(req.user);
     const refreshToken=cookies.jwt;
     if(req.user){
         const foundedUser=await User.findOne({username:req.user.username}).exec();
@@ -98,23 +99,23 @@ const refresh=async (req, res)=>{
     
 }
 //create logout Route
-const logout=(req,res)=>{
-    const cookies=req.cookies
-    
-    if(!cookies?.jwt) return res.status(204);
-    req.user={};
+const logout = (req, res) => {
+    const cookies = req.cookies;
+    if (!cookies?.jwt) {
+        return res.sendStatus(204);
+    }
+
+    // Clear both cookies
+    res.clearCookie('google-auth');
     res.clearCookie('jwt', {
-        httpOnly:true,
-        sameSite:'None',
+        httpOnly: true,
+        sameSite: 'None',
         secure: true
-    })
-    res.clearCookie('google-auth', {
-        httpOnly:true,
-        sameSite:'None',
-        secure: true
-    })
-    res.json({message: "Cookie is cleared"});
-}
+    });
+
+    // Send response after clearing cookies
+    res.json({ message: "Cookies are cleared" });
+};
 module.exports={
     login,
     refresh,

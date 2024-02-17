@@ -20,12 +20,11 @@ export default function Navbar(){
         window.addEventListener('scroll', handleScroll)
         return ()=>{ window.removeEventListener('scroll', handleScroll)}
     },[])
-    const handleLogout=()=>{
+    const handleLogout=async()=>{
+        await dispatch(logout());
+        await dispatch(resetState());
         
-        dispatch(resetState());
-        dispatch(logout()).then(()=>{
-            navigate('/login');
-        })
+        navigate('/login');
     }
     return(
         <>
