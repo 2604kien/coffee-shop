@@ -4,10 +4,11 @@ import Footer from "./Footer";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { refresh} from "../reducers/authReducer";
+import Loading from "./Loading";
 export default function Layout(){
     const dispatch=useDispatch();
     const token=useSelector(state=> state.auth.token);
-    
+    const status=useSelector(state=>state.auth.status);
     const isLogin=useSelector(state=>state.auth.isLogin);
     React.useEffect(()=>{
         if(!isLogin) dispatch(refresh())
@@ -26,6 +27,7 @@ export default function Layout(){
 },[dispatch,token, isLogin]);
     return (
         <>
+            {status==="loading"&&<Loading/>}
             <Navbar/>
             <Outlet/>
             <Footer/>

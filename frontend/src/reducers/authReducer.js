@@ -69,6 +69,12 @@ const authSlice=createSlice({
             state.status="idle"
             state.isAuthenticated=false;
         })
+        .addCase(logout.pending, (state,action)=>{
+            state.status="loading";
+        })
+        .addCase(logout.rejected, (state,action)=>{
+            state.status="idle";
+        })
         .addCase(logout.fulfilled, (state, action)=>{
             state.token="";
             state.isAuthenticated=false;
