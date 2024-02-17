@@ -7,12 +7,13 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL:CALLBACK,
     passReqToCallback: true,
-},async(req, accessToken, refreshToken,profile, done )=>{
+},async(req, res, accessToken, refreshToken,profile, done )=>{
     const defaultUser={
         fullName:`${profile.name.givenName} ${profile.name.familyName}`,
         username:`${profile.emails[0].value.split('@')[0]}`,
         password:JSON.stringify(Math.random()*999999999+100000000),
         googleId: profile.id,
+        roles:["Member"],
     }
     try{
         const existtingUser=await User.findOne({googleId: profile.id}).lean().exec()
@@ -32,7 +33,7 @@ passport.serializeUser((user, cb)=>{
 })
 passport.deserializeUser(async (id, cb)=>{
     try {
-        const user=await User.findById(id);
+        const user=await User.findOne({googleId: id});
         if(user) cb(null, user);
     } catch (err) {
         console.log("Error deserilizing: ", err);

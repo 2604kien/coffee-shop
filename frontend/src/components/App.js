@@ -14,6 +14,7 @@ import DisplayRecipe from "./DisplayRecipe";
 import AllUser from "./AllUser";
 import EditUser from "./EditUser";
 import EditRecipe from "./EditRecipe";
+import LoginSuccess from "./LoginSuccess";
 function App() {
   return (
       <Routes>
@@ -32,6 +33,7 @@ function App() {
           <Route path="booking-list" element={<BookingList/>}/>
           <Route path="*" element={<Error404/>}/>
         </Route>
+        <Route path='/login/success' element={<LoginSuccess/>}/>
       </Routes>
   );
 }

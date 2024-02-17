@@ -5,6 +5,7 @@ const app=express();
 const connectDB=require('./config/dbConn');
 const path=require('path');
 const session=require('express-session');
+const cookieSession=require('cookie-session');
 const mongoose=require('mongoose');
 const cors=require('cors')
 const corsOptions=require('./config/corsOptions');
@@ -16,10 +17,16 @@ const PORT=3500;
 connectDB();
 app.use(cors(corsOptions));
 app.use(session({
-    secret: 'keyboard cat',
+    secret: process.env.ACCESS_SECRET_TOKEN,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    name:'google-auth',
+    saveUninitialized: false,
+    cookie:{
+        httpOnly: true,
+        sameSite:'None',
+        secure:true,
+        maxAge:24*60*60*1000
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
