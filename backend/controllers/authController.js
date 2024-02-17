@@ -44,7 +44,6 @@ const login=async (req,res)=>{
 
 const refresh=async (req, res)=>{
     const cookies=req.cookies;
-    console.log("User: "+req.user);
     if(!cookies?.jwt && !req.user){
         return res.status(401).json({message: "Unauthorized"});
     }
