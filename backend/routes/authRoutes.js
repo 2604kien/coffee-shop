@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router();
 const passport=require('passport');
-const frontend="https://www.hiase.cafe/"
+const frontend="https://hiase.onrender.com/"
 const authController=require('../controllers/authController');
 require('../controllers/auth/passportGoogleSSO');
 router.route('/login')
