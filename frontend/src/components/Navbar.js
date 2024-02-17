@@ -21,9 +21,9 @@ export default function Navbar(){
         return ()=>{ window.removeEventListener('scroll', handleScroll)}
     },[])
     const handleLogout=async()=>{
+        setDropDown(false);
         await dispatch(logout());
         await dispatch(resetState());
-        
         navigate('/login');
     }
     return(
@@ -43,11 +43,11 @@ export default function Navbar(){
                     <i onClick={()=>{setDropDown(prev=>!prev)}} style={{cursor: "pointer"}} className="fa-solid fa-bars"></i>
                 </div>
                 <div className={dropDown?"mobile--nav--container open":"mobile--nav--container"} style={{backgroundColor: window.scrollY===0 && pathname==="/"? "transparent":"white"}}>
-                    <li onClick={()=>{navigate('/')}}>Home</li>
-                    {isAuthenticated && <li onClick={()=>navigate('/recipe')}>Coffe Recipe</li>}
-                    {isAdminAuthorized && isAuthenticated?<li onClick={()=>navigate('/booking-list')}>Booking List</li>: <li onClick={()=>navigate('/menu')}>Today's Menu</li>}
-                    {isAdminAuthorized && isAuthenticated?<li onClick={()=>navigate('/all-users')}>All Users</li>:<li onClick={()=>navigate('/booking')}>Booking</li>}
-                    {isAuthenticated?<li onClick={handleLogout}>Logout</li>: <li onClick={()=>navigate('/login')}>Login</li>}
+                    <li onClick={()=>{navigate('/'); setDropDown(false)}}>Home</li>
+                    {isAuthenticated && <li onClick={()=>{navigate('/recipe'); setDropDown(false)}}>Coffe Recipe</li>}
+                    {isAdminAuthorized && isAuthenticated?<li onClick={()=>{navigate('/booking-list'); setDropDown(false)}}>Booking List</li>: <li onClick={()=>navigate('/menu')}>Today's Menu</li>}
+                    {isAdminAuthorized && isAuthenticated?<li onClick={()=>{navigate('/all-users'); setDropDown(false)}}>All Users</li>:<li onClick={()=>navigate('/booking')}>Booking</li>}
+                    {isAuthenticated?<li onClick={handleLogout}>Logout</li>: <li onClick={()=>{navigate('/login'); setDropDown(false)}}>Login</li>}
                 </div>
                 </div>
             </ul>
