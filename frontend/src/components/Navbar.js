@@ -26,7 +26,7 @@ export default function Navbar(){
         setDropDown(false);
         await dispatch(logoutUser());
         await dispatch(resetState());
-        if(isAuthenticated) logout();
+        if(isAuthenticated) logout({ logoutParams: { returnTo: window.location.origin } });
         navigate('/login');
     }
     return(
