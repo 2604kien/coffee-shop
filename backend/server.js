@@ -6,7 +6,7 @@ const connectDB=require('./config/dbConn');
 const path=require('path');
 const session=require('express-session');
 const mongoose=require('mongoose');
-const cors=require('cors')
+const cors=require('cors');
 const corsOptions=require('./config/corsOptions');
 const cookieParser=require('cookie-parser')
 const {logger, logEvent}=require('./middleware/logger');
@@ -35,8 +35,8 @@ app.use(session({
     cookie:{
         maxAge:24*60*60*1000,
         httpOnly:true,
-        sameSite:'None',
-        secure: true
+        sameSite:true, // change in production
+        secure: false // change in production
     }
 }));
 app.use(passport.initialize());

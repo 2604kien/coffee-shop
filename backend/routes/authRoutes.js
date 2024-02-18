@@ -4,6 +4,8 @@ const passport=require('passport');
 const frontend="https://www.hiase.cafe/"
 const authController=require('../controllers/authController');
 require('../controllers/auth/passportGoogleSSO');
+router.route('/auth0')
+    .post(authController.auth0Login);
 router.route('/login')
     .post(authController.login)
 router.route('/refresh')

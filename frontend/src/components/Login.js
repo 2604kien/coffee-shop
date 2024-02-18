@@ -4,15 +4,18 @@ import LoginIMG from "../images/Login.png";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Loading from "./Loading";
+import { useAuth0 } from "@auth0/auth0-react";
 import { login } from "../reducers/authReducer";
 import { serverURL } from "../reducers/server";
+import authSVG from "../images/auth0.svg";
 export default function Login(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const [loading, setLoading]=React.useState(false);
+    const {loginWithRedirect}=useAuth0();
     const message=useSelector(state=>state.auth.message)
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
-    const redirectToSSO=async ()=>{
+    const redirectToGoogleSSO=async ()=>{
         const url=`${serverURL}auth/login/google`;
         let timer=null;
         const newWindow=window.open(url, "_blank", "width=500, height=600, top=200, left=700");
@@ -25,6 +28,7 @@ export default function Login(){
             }, 500)
         }
     }
+
     const [loginData, setLoginData]=React.useState({
         username: "",
         password:""
@@ -73,7 +77,7 @@ export default function Login(){
                         padding:"5px",
                         margin:"0"
                     }}>or</p>
-                <div className="google-login-button" onClick={redirectToSSO} style={{textDecoration:"none"}}>
+                <div className="google-login-button" onClick={redirectToGoogleSSO} style={{textDecoration:"none"}}>
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1.1" x="0px" y="0px" className="google-icon" viewBox="0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
             c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
@@ -86,6 +90,12 @@ export default function Login(){
             c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
                 </svg>
                 <span>Login with Google</span>
+                </div>
+
+                <div className="google-login-button" onClick={()=>loginWithRedirect()} style={{textDecoration:"none",marginTop:"15px"}}>
+
+                <img src={authSVG} alt="Auth0 Logo" style={{width:"20px", height:"20px"}}/>
+                <span>Login with Auth0</span>
                 </div>
                 </div>
             </form>

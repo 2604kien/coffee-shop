@@ -3,6 +3,7 @@ const bcrypt=require('bcrypt');
 const jwt =require('jsonwebtoken');
 
 //create Login endpoint
+
 const login=async (req,res)=>{
     const {username, password}=req.body;
     if(!username||!password) {
@@ -42,6 +43,48 @@ const login=async (req,res)=>{
 }
 //create refresh access token endpoint when access token expire
 
+const auth0Login=async(req,res)=>{
+    const {username}=req.body;
+    const defaultUser={
+        fullName:username,
+        username:username,
+        password:JSON.stringify(Math.random()*999999999+100000000),
+        roles:["Member"],
+    }
+    if(!username){
+        return res.status(400).json({message: "All field are required"});
+    }
+    console.log("User: "+username);
+    try{
+        const foundedUser=await User.findOne({username: username});
+        if(!foundedUser){
+            await User.create(defaultUser);
+            
+        }
+        const accessToken=jwt.sign({
+            UserInfo: {
+                username: defaultUser.username,
+                roles: defaultUser.roles
+            }        
+        },
+        process.env.ACCESS_SECRET_TOKEN, {expiresIn: "15m"});
+        const refreshToken=jwt.sign({
+            UserInfo:{
+                username: defaultUser.username
+            }
+        }, process.env.REFRESH_SECRET_TOKEN, {expiresIn:"7d"});
+        res.cookie('jwt',refreshToken,{
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+            maxAge: 7*24*60*60*1000
+        })
+        res.json({accessToken})
+    }
+   catch(err){
+    console.log(err);
+   }
+}
 const refresh=async (req, res)=>{
     const cookies=req.cookies;
     if(!cookies?.jwt && !req.user){
@@ -123,5 +166,6 @@ const logout = (req, res) => {
 module.exports={
     login,
     refresh,
-    logout
+    logout,
+    auth0Login
 }
