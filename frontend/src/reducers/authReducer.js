@@ -23,8 +23,12 @@ export const refresh=createAsyncThunk('auth/refresh', async()=>{
     const response=await axios.post(serverURL+"auth/refresh",{}, { withCredentials: true });
     return response.data
 })
-export const logout=createAsyncThunk('auth/logout', async()=>{
+export const logoutUser=createAsyncThunk('auth/logout', async()=>{
     const response=await axios.post(serverURL+"auth/logout",{}, { withCredentials: true })
+    return response.data;
+})
+export const Auth0Login=createAsyncThunk('auth/Auth0Login', async({username})=>{
+    const response=await axios.post(serverURL+"auth/auth0", {username:username}, {withCredentials:true});
     return response.data;
 })
 const authSlice=createSlice({
@@ -69,17 +73,36 @@ const authSlice=createSlice({
             state.status="idle"
             state.isAuthenticated=false;
         })
-        .addCase(logout.pending, (state,action)=>{
+        .addCase(logoutUser.pending, (state,action)=>{
             state.status="loading";
         })
-        .addCase(logout.rejected, (state,action)=>{
+        .addCase(logoutUser.rejected, (state,action)=>{
             state.status="idle";
         })
-        .addCase(logout.fulfilled, (state, action)=>{
+        .addCase(logoutUser.fulfilled, (state, action)=>{
             state.token="";
             state.isAuthenticated=false;
             state.isAdminAuthorized=false;
             state.isLogin=false;
+        })
+        .addCase(Auth0Login.fulfilled,(state, action)=>{
+            state.status='succeeded';
+            state.token=action.payload.accessToken;
+            state.message="";
+            if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
+            else state.isAdminAuthorized=false;
+            state.userRoles=JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles;
+            if(state.userRoles.includes("Admin")) state.isAdminAuthorized=true;
+            else state.isAdminAuthorized=false;
+            state.isAuthenticated=true;
+            state.isLogin=true;
+        })
+        .addCase(Auth0Login.pending, (state, action)=>{
+            state.status="loading";
+        })
+        .addCase(Auth0Login.rejected, (state, action)=>{
+            state.message=action.error.message;
+            state.status='idle';
         })
     }
 })
