@@ -61,16 +61,17 @@ const auth0Login=async(req,res)=>{
             await User.create(defaultUser);
             
         }
+        const existUser=await User.findOne({username: username});
         const accessToken=jwt.sign({
             UserInfo: {
-                username: defaultUser.username,
-                roles: defaultUser.roles
+                username: existUser.username,
+                roles: existUser.roles
             }        
         },
         process.env.ACCESS_SECRET_TOKEN, {expiresIn: "15m"});
         const refreshToken=jwt.sign({
             UserInfo:{
-                username: defaultUser.username
+                username: existUser.username
             }
         }, process.env.REFRESH_SECRET_TOKEN, {expiresIn:"7d"});
         res.cookie('jwt',refreshToken,{
