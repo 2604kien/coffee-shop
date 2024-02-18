@@ -35,8 +35,8 @@ app.use(session({
     cookie:{
         maxAge:24*60*60*1000,
         httpOnly:true,
-        sameSite:true, // change in production
-        secure: false // change in production
+        sameSite:'None', // change in production
+        secure: true // change in production
     }
 }));
 app.use(passport.initialize());
