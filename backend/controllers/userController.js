@@ -22,7 +22,7 @@ const createNewUser=async(req,res,next)=>{
             return res.json({message: "All field is required"});
         }
         //check if there is existing user with the same username
-        const existUsername= await User.findOne({username: username}).lean().exec()
+        const existUsername= await User.findOne({username: username});
         if(existUsername){
             return res.status(409).json({message: `An account with username: ${username} is already created`});
         }
