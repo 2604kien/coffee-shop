@@ -60,4 +60,3 @@ mongoose.connection.once('open', ()=>{
         console.log("Server is running at port "+PORT);
     })
 })
-module.exports=app;
