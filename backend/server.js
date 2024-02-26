@@ -9,7 +9,6 @@ const mongoose=require('mongoose');
 const cors=require('cors');
 const corsOptions=require('./config/corsOptions');
 const cookieParser=require('cookie-parser')
-const {logger, logEvent}=require('./middleware/logger');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 app.use(cookieParser())
@@ -43,7 +42,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.options('*', cors(corsOptions))
 app.use(express.urlencoded({extended: false}));
-app.use(logger);
 app.use(express.json())
 
 
