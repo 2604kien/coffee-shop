@@ -11,16 +11,20 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building.."
-                bat'cd backend/'
-                bat 'npm install'
-                bat 'npm run build'
+                sh '''
+                cd backend/
+                npm install
+                npm run build
+                '''
             }
         }
         stage('Test') {
             steps {
                 echo "Testing.."
-                bat'cd backend/'
-                bat 'npm test'
+                sh '''
+                cd backend/
+                npm test
+                '''
             }
         }
         stage('Deliver') {
