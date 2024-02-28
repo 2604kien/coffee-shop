@@ -1,10 +1,11 @@
 pipeline {
-    agent any
-     environment {
-        tools {
-            nodeJSHome = tool 'nodejs'
-            PATH = "$PATH:$nodeJSHome/bin"
-        }
+    agent { 
+        node {
+            label 'docker-agent-alpine'
+            }
+      }
+    tools {
+        nodejs "nodejs"
     }
     triggers {
         pollSCM '* * * * *'
