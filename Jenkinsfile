@@ -12,20 +12,24 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building.."
-                sh '''
-                cd backend/
-                npm install
-                npm run build
-                '''
+                nodejs(nodeJSInstallationName: 'Node 18.x') {
+                    sh '''
+                    cd backend/
+                    npm install
+                    npm run build
+                    '''
+                }
             }
         }
         stage('Test') {
             steps {
                 echo "Testing.."
-                sh '''
-                cd backend/
-                npm test
-                '''
+                nodejs(nodeJSInstallationName: 'Node 18.x') {
+                    sh '''
+                    cd backend/
+                    npm test
+                    '''
+                }
             }
         }
         stage('Deliver') {
