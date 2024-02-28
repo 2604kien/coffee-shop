@@ -4,7 +4,6 @@ pipeline {
             label 'docker-agent-alpine'
             }
       }
-    tools {nodejs "nodejs"}
     triggers {
         pollSCM '* * * * *'
     }
@@ -12,20 +11,16 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building.."
-                sh '''
-                cd backend/
-                npm install
-                npm run build
-                '''
+                bat'cd backend/'
+                bat 'npm install'
+                bat 'npm run build'
             }
         }
         stage('Test') {
             steps {
                 echo "Testing.."
-                sh '''
-                cd backend/
-                npm test
-                '''
+                bat'cd backend/'
+                bat 'npm test'
             }
         }
         stage('Deliver') {
