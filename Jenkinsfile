@@ -14,7 +14,6 @@ pipeline {
                 sh '''
                 cd backend/
                 npm run build
-                echo "doing build stuff.."
                 '''
             }
         }
@@ -24,7 +23,6 @@ pipeline {
                 sh '''
                 cd backend/
                 npm test
-                echo "doing test stuff..
                 '''
             }
         }
