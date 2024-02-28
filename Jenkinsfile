@@ -1,8 +1,10 @@
 pipeline {
     agent any
      environment {
-        nodeJSHome = tool 'nodejs'
-        PATH = "$PATH:$nodeJSHome/bin"
+        tools {
+            nodeJSHome = tool 'nodejs'
+            PATH = "$PATH:$nodeJSHome/bin"
+        }
     }
     triggers {
         pollSCM '* * * * *'
