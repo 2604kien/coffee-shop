@@ -1,9 +1,5 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-alpine'
-            }
-      }
+    agent any
      environment {
         nodeJSHome = tool 'nodejs'
         PATH = "$PATH:$nodeJSHome/bin"
