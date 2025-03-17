@@ -53,6 +53,7 @@ app.use('/auth', require('./routes/authRoutes'));
 app.use('/users', require('./routes/userRoutes'));
 app.use('/coffee', require('./routes/coffeeRoutes'));
 app.use('/booking', require('./routes/bookingRoutes'));
+app.use('/data', require('./routes/dataRoutes'));
 
 mongoose.connection.once('open', ()=>{
     console.log('Connected to MongoDB');
